@@ -3,14 +3,18 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-
+	
+	<!-- Create Recipes table. -->
     <changeSet id="1" author="baverty">
         
-        <loadData encoding="UTF-8"
-                  file="liquibase/data/dev-recipes.csv"
-                  separator=";"
-                  tableName="recipes">
-        </loadData>
+        <createTable tableName="recipes">
+        	<column name="tid" type="bigint">
+        		<constraints primaryKey="true" />
+        	</column>
+        	<column name="instructions" type="CLOB">
+        		<constraints nullable="false" />
+        	</column>
+        </createTable>
     
     </changeSet>
     

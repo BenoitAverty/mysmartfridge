@@ -3,6 +3,10 @@ spring:
     show-sql: true # Show SQL generated with Spring data JPA
   profiles:
     active: dev # Activate spring dev profile
+  h2:
+    console: 
+      enabled: true
+      path: /console/
 server: 
   port: 8080
 logging:

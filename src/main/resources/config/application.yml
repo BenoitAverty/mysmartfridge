@@ -5,4 +5,10 @@ endpoints:
   shutdown:
     enabled: true
     sensitive: false
+    
+# deactivate hbm2ddl
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
   
