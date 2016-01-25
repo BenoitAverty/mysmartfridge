@@ -16,3 +16,10 @@ hs_err_pid*
 .classpath
 .project
 .settings*
+
+# Build artifacts
+.sass-cache/
+node_modules/
+
+src/main/webapp/css/
+**/*.dist.js
