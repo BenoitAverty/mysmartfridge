@@ -12,10 +12,16 @@
 hs_err_pid*
 /target/
 
-# eclipse files
+# eclipse and other IDE files
 .classpath
 .project
 .settings*
+
+*.sublime-project
+*.sublime-workspace
+
+# Execution artifacts
+log/
 
 # Build artifacts
 .sass-cache/
