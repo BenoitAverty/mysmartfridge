@@ -7,13 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysmartfridge.application.RecipeApplication;
+import com.mysmartfridge.application.RecipesApplication;
+import com.mysmartfridge.application.dto.RecipeDto;
 
 @RestController
-public class SampleController {
+public class RecipesController {
 
+	/**
+	 * Application for the recipes.
+	 */
 	@Autowired
-	RecipeApplication recipeApp;
+	RecipesApplication recipeApp;
 	
 	@RequestMapping(value="/recipes/{tid}", method=RequestMethod.GET)
 	public String getRecipes(@PathVariable("tid") long tid) {
@@ -21,9 +25,8 @@ public class SampleController {
 	}
 	
 	@RequestMapping(value="/recipes", method=RequestMethod.POST)
-	public long postRecipes(@RequestBody String body) {
-		return recipeApp.createRecipe(body);
+	//@Secured(AuthoritiesConstants.USER)
+	public RecipeDto postRecipes(@RequestBody RecipeDto dto) {
+		return recipeApp.createRecipe(dto);
 	}
-	
-	
 }

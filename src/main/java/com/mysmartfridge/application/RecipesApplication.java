@@ -3,11 +3,12 @@ package com.mysmartfridge.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysmartfridge.application.dto.RecipeDto;
 import com.mysmartfridge.domain.Recipe;
 import com.mysmartfridge.domain.RecipeRepository;
 
 @Service
-public class RecipeApplication {
+public class RecipesApplication {
 
 	@Autowired
 	private RecipeRepository recipeRepo;
@@ -16,11 +17,18 @@ public class RecipeApplication {
 		return recipeRepo.findOne(tid).toString();
 	}
 
-	public long createRecipe(String body) {
+	/**
+	 * Create a recipe and save it in database.
+	 * 
+	 * @param recipeDto the recipe to create.
+	 * @return a RecipeDto representing the created recipe.
+	 */
+	public RecipeDto createRecipe(RecipeDto recipeDto) {
 
-		Recipe newRecipe = new Recipe(body);
+		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.instructions);
 		recipeRepo.save(newRecipe);
-		return newRecipe.getTid();
+		
+		return new RecipeDto(newRecipe);
 	}
 
 }
