@@ -1,6 +1,7 @@
 package com.mysmartfridge.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,6 @@ public class RecipesController {
 	}
 	
 	@RequestMapping(value="/recipes", method=RequestMethod.POST)
-	//@Secured(AuthoritiesConstants.USER)
 	public RecipeDto postRecipes(@RequestBody RecipeDto dto) {
 		return recipeApp.createRecipe(dto);
 	}

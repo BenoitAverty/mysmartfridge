@@ -14,3 +14,7 @@ logging:
     org.hibernate: INFO
     org.springframework: INFO
     com.baverty: DEBUG
+security:
+    user:
+        name: test
+        password: test

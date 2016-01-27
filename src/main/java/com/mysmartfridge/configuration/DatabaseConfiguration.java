@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.mysmartfridge.MySmartFridgeApplication;
+import com.mysmartfridge.MySmartFridge;
 
 import liquibase.integration.spring.SpringLiquibase;
 
@@ -28,7 +28,7 @@ public class DatabaseConfiguration {
      * Open the TCP port for the H2 database, so it is available remotely.
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
-    @Profile(MySmartFridgeApplication.PROFILE_DEV)
+    @Profile(MySmartFridge.PROFILE_DEV)
     public Server h2TCPServer() throws SQLException {
         return Server.createTcpServer("-tcp","-tcpAllowOthers");
     }

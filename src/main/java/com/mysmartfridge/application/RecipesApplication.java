@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.mysmartfridge.application.dto.RecipeDto;
 import com.mysmartfridge.domain.Recipe;
-import com.mysmartfridge.domain.RecipeRepository;
+import com.mysmartfridge.domain.repositories.RecipeRepository;
 
 @Service
 public class RecipesApplication {
