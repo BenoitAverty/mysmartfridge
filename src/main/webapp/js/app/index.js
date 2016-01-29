@@ -3,6 +3,7 @@
 var angular = require('angular');
 require('angular-route');
 
+// Déclaration du module
 var mysmartfridge = angular.module('mySmartFridge', ['ngRoute']);
 
 mysmartfridge.config(function($routeProvider) {
