@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'sass/',
-          src: ['mysmartfridge.scss'],
+          src: ['*.scss'],
           dest: 'css/',
           ext: '.css'
         }]

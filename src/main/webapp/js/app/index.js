@@ -1,0 +1,23 @@
+'use strict';
+
+var angular = require('angular');
+require('angular-route');
+
+var mysmartfridge = angular.module('mySmartFridge', ['ngRoute']);
+
+mysmartfridge.config(function($routeProvider) {
+
+  $routeProvider.when('/random-recipe', {
+    templateUrl: 'partials/random_recipe.html',
+    controller: 'RandomRecipeCtrl',
+  })
+  .when('/about', {
+    templateUrl: 'partials/about.html'
+  })
+  .otherwise({
+    redirectTo: '/random-recipe',
+  });
+});
+
+require('./controllers')
+require('./services')
