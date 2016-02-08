@@ -11,6 +11,7 @@ import com.mysmartfridge.application.RecipesApplication;
 import com.mysmartfridge.application.dto.RecipeDto;
 
 @RestController
+@RequestMapping(value="/api/recipes")
 public class RecipesController {
 
 	/**
@@ -19,13 +20,18 @@ public class RecipesController {
 	@Autowired
 	RecipesApplication recipeApp;
 	
-	@RequestMapping(value="/recipes/{tid}", method=RequestMethod.GET)
-	public String getRecipes(@PathVariable("tid") long tid) {
+	@RequestMapping(value="/{tid}", method=RequestMethod.GET)
+	public RecipeDto getRecipes(@PathVariable("tid") long tid) {
 		return recipeApp.findARecipe(tid);
 	}
 	
-	@RequestMapping(value="/recipes", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public RecipeDto postRecipes(@RequestBody RecipeDto dto) {
 		return recipeApp.createRecipe(dto);
+	}
+	
+	@RequestMapping(value="/random", method=RequestMethod.GET)
+	public RecipeDto getRecipesRandom() {
+		return recipeApp.findRandomRecipe();
 	}
 }

@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,16 +30,19 @@ public class Recipe implements Serializable {
 	private String title;
 	
 	@Column
-	@Type(type="text")
 	@Getter
-	private String instructions;
+	private String ingredients;
 	
-	public Recipe(String title, String instructions) {
+	@Column
+	@Getter
+	private String steps;
+	
+	public Recipe(String title, String steps) {
 		this.title = title;
-		this.instructions = instructions;
+		this.steps = steps;
 	}
 	
 	public String toString() {
-		return "[" + this.tid + "] " + this.title + " : " + this.instructions;
+		return "[" + this.tid + "] " + this.title + " : " + this.steps;
 	}
 }

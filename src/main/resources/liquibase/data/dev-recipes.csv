@@ -1,2 +1,3 @@
-tid;title;instructions
-1;Quiche Lorraine;<p>Recette de la quiche lorraine.</p><p>Deux paragraphes.</p>
+tid;title;ingredients;steps
+1;Quiche Lorraine;<ul><li>Lardons</li><li>Oignons</li></ul>;<p>Recette de la quiche lorraine.</p><p>Deux paragraphes.</p>
+2;Poulet Roti;<ul><li>Poulet</li><li>Roti</li></ul>;<p>Recette du poulet roti.</p><p>Poulet roti ?</p>

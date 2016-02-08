@@ -17,7 +17,8 @@ public class RecipeDto {
 	public RecipeDto(Recipe recipe) {
 		this.tid = recipe.getTid();
 		this.title = recipe.getTitle();
-		this.instructions = recipe.getInstructions();
+		this.ingredients = recipe.getIngredients();
+		this.steps = recipe.getSteps();
 	}
 
 	/** tid of the recipe. This attribute represents the identity of a recipe. */
@@ -26,6 +27,9 @@ public class RecipeDto {
 	/** Title of the recipe. */
 	public String title;
 	
+	/** Ingredients. */
+	public String ingredients;
+	
 	/** Html instructions of the recipe. */
-	public String instructions;
+	public String steps;
 }

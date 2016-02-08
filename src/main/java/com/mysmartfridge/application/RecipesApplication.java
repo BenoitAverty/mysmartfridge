@@ -1,5 +1,7 @@
 package com.mysmartfridge.application;
 
+import java.security.SecureRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,14 @@ public class RecipesApplication {
 	@Autowired
 	private RecipeRepository recipeRepo;
 	
-	public String findARecipe(long tid) {
-		return recipeRepo.findOne(tid).toString();
+	/**
+	 * Find a recipe based on its tid
+	 * 
+	 * @param tid the tid of the recipe to find
+	 * @return a RecipeDto representing the found recipe
+	 */
+	public RecipeDto findARecipe(long tid) {
+		return new RecipeDto(recipeRepo.findOne(tid));
 	}
 
 	/**
@@ -25,10 +33,31 @@ public class RecipesApplication {
 	 */
 	public RecipeDto createRecipe(RecipeDto recipeDto) {
 
-		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.instructions);
+		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.steps);
 		recipeRepo.save(newRecipe);
 		
 		return new RecipeDto(newRecipe);
+	}
+	
+	/**
+	 * Find a random recipe in database.
+	 */
+	public RecipeDto findRandomRecipe() {
+		
+		Iterable<Recipe> allRecipes = recipeRepo.findAll();
+		
+		SecureRandom rand = new SecureRandom();
+		double min = 1.0;
+		Recipe chosenRecipe = null;
+		for (Recipe recipe : allRecipes) {
+			double cur = rand.nextDouble();
+			if (cur < min) {
+				min = cur;
+				chosenRecipe = recipe;
+			}
+		}
+		
+		return new RecipeDto(chosenRecipe);
 	}
 
 }

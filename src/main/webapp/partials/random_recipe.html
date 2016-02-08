@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-ng-controller="RandomRecipeCtrl as randomRecipeCtrl">
 
 		<!-- Carrousel + title and recipe info -->
 		<div class="row">
@@ -29,7 +29,7 @@
 												<span class="icon-next"></span>
 										</a>
 								</div>
-								<h2 class="brand-name">Quiche Lorraine</h1>
+								<h2 class="brand-name">{{randomRecipeCtrl.title}}</h1>
 								<hr class="tagline-divider" />
 								<aside class="recipe-info">
 									<ul>

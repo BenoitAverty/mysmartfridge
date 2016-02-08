@@ -13,7 +13,10 @@
 			<column name="title" type="varchar(255)">
 				<constraints nullable="false" />
 			</column>
-			<column name="instructions" type="CLOB">
+			<column name="ingredients" type="CLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="steps" type="CLOB">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
