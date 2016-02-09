@@ -13,6 +13,18 @@
         </loadData>
         
         <loadData encoding="UTF-8"
+                  file="liquibase/data/dev-products.csv"
+                  separator=";"
+                  tableName="products">
+        </loadData>
+        
+        <loadData encoding="UTF-8"
+                  file="liquibase/data/dev-ingredients.csv"
+                  separator=";"
+                  tableName="ingredients">
+        </loadData>
+        
+        <loadData encoding="UTF-8"
                   file="liquibase/data/dev-users.csv"
                   separator=";"
                   tableName="users">

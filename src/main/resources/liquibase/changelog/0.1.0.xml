@@ -13,18 +13,62 @@
 			<column name="title" type="varchar(255)">
 				<constraints nullable="false" />
 			</column>
-			<column name="ingredients" type="CLOB">
+			<column name="nb_people" type="integer">
 				<constraints nullable="false" />
 			</column>
-			<column name="steps" type="CLOB">
+			<column name="prep_time" type="integer">
+				<constraints nullable="false" />
+			</column>
+			<column name="cook_time" type="integer">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
 
 	</changeSet>
+	
+	<!-- Create Steps table -->
+	<changeSet id="2" author="baverty">
+		<createTable tableName="steps">
+			<column name="recipe_tid" type="bigint">
+				<constraints primaryKey="true" references="recipes(tid)" foreignKeyName="steps_recipe_fk" />
+			</column>
+			<column name="index" type="int">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="text" type="CLOB">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	
+	<!-- Create products table -->
+	<changeSet id="3" author="baverty">
+		<createTable tableName="products">
+			<column name="tid" type="bigint">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!-- Create ingredients table -->
+	<changeSet id="4" author="baverty">
+		<createTable tableName="ingredients">
+			<column name="recipe_tid" type="bigint">
+				<constraints primaryKey="true" references="recipes(tid)" foreignKeyName="ingredients_recipe_fk" />
+			</column>
+			<column name="product_tid" type="bigint">
+				<constraints primaryKey="true" references="products(tid)" foreignKeyName="ingredients_product_fk" />
+			</column>
+			<column name="quantity" type="varchar(255)">
+			</column>
+		</createTable>
+	</changeSet>
 
 	<!-- Create Users table -->
-	<changeSet id="2" author="baverty">
+	<changeSet id="5" author="baverty">
 
 		<createTable tableName="users">
 			<column name="tid" type="bigint" autoIncrement="true">

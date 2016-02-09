@@ -2,11 +2,17 @@ module.exports = function(RecipeService) {
   var vm = this;
 
   // Attributes and initialization
-  vm.title = '';
-  vm.ingredients = '';
-  vm.steps = '';
+  vm.recipe = {
+    tid: 0,
+    title: '',
+    nbPeople: 0,
+    prepTime: 0,
+    cookTime: 0,
+    ingredients: [],
+    steps: []
+  }
   randomize();
-  
+
   // Public methods
   vm.randomize = randomize();
 
@@ -14,9 +20,10 @@ module.exports = function(RecipeService) {
   function randomize() {
     RecipeService.getRandomRecipe(
       function(recipe) {
-        vm.title = recipe.title;
-        vm.ingredients = recipe.ingredients;
-        vm.steps = recipe.steps;
+        angular.extend(vm.recipe, recipe)
+      },
+      function(status) {
+        // Show error ?
       }
     )
   }

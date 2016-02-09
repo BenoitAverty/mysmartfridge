@@ -1,5 +1,7 @@
 package com.mysmartfridge.application.dto;
 
+import java.util.List;
+
 import com.mysmartfridge.domain.Recipe;
 
 import lombok.NoArgsConstructor;
@@ -17,6 +19,9 @@ public class RecipeDto {
 	public RecipeDto(Recipe recipe) {
 		this.tid = recipe.getTid();
 		this.title = recipe.getTitle();
+		this.nbPeople = recipe.getNbPeople();
+		this.prepTime = recipe.getPrepTime();
+		this.cookTime = recipe.getCookTime();
 		this.ingredients = recipe.getIngredients();
 		this.steps = recipe.getSteps();
 	}
@@ -27,9 +32,18 @@ public class RecipeDto {
 	/** Title of the recipe. */
 	public String title;
 	
+	/** How many people the recipe is for. */
+	public int nbPeople;
+	
+	/** Time in minutes required to prepare the recipe. */
+	public int prepTime;
+	
+	/** Time in minutes needed to cook the recipe. */
+	public int cookTime;
+	
 	/** Ingredients. */
-	public String ingredients;
+	public List<String> ingredients;
 	
 	/** Html instructions of the recipe. */
-	public String steps;
+	public List<String> steps;
 }

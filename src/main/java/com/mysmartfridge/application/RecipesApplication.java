@@ -33,7 +33,7 @@ public class RecipesApplication {
 	 */
 	public RecipeDto createRecipe(RecipeDto recipeDto) {
 
-		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.steps);
+		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.nbPeople, recipeDto.prepTime, recipeDto.cookTime);
 		recipeRepo.save(newRecipe);
 		
 		return new RecipeDto(newRecipe);
