@@ -13,7 +13,7 @@ logging:
   level:
     org.hibernate: INFO
     org.springframework: INFO
-    com.baverty: DEBUG
+    com.mysmartfridge: DEBUG
 security:
   basic:
     enabled: false

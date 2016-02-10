@@ -1,44 +1,57 @@
 package com.mysmartfridge.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
-import com.mysmartfridge.domain.User;
-import com.mysmartfridge.domain.repositories.UserRepository;
 import com.mysmartfridge.security.AuthoritiesConstants;
+import com.mysmartfridge.security.UserDetailsService;
 
+
+@EnableWebSecurity
 @Configuration
-public class SecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserRepository userRepository;
-
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService);
+	}
+	
 	@Override
-	public void init(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService());
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring()
+			.antMatchers("/fonts/**")
+			.antMatchers("/js/**.js")
+			.antMatchers("/img/**")
+			.antMatchers("/css/**.css")
+			.antMatchers("/partials/**.html")
+			.antMatchers("/console/**");
 	}
-
-	@Bean
-	UserDetailsService userDetailsService() {
-		return new UserDetailsService() {
-			@Override
-			public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-				User user = userRepository.findByEmail(email);
-				if(user != null) {
-					return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true, true, true, AuthorityUtils.createAuthorityList(AuthoritiesConstants.USER));
-				}
-				else {
-					throw new UsernameNotFoundException("Could not find user " + email);
-				}
-			}
-		};
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.httpBasic()
+		.and()
+	        .csrf()
+	    .and()
+	        .headers()
+	        .frameOptions()
+	        .disable()
+	    .and()
+	        .authorizeRequests()
+	        .antMatchers("/api/recipes/**").permitAll()
+	        .antMatchers(HttpMethod.POST, "/api/recipes").authenticated()
+	        .antMatchers("/manage/**").hasAuthority(AuthoritiesConstants.ADMIN);
+		
 	}
-
+	
 }
