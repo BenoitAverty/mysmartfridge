@@ -15,6 +15,9 @@ mysmartfridge.config(function($routeProvider) {
   .when('/about', {
     templateUrl: 'partials/about.html'
   })
+  .when('/login', {
+    templateUrl: 'partials/login_page.html'
+  })
   .otherwise({
     redirectTo: '/random-recipe',
   });
