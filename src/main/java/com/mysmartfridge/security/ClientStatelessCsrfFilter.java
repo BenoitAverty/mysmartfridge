@@ -20,8 +20,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class ClientStatelessCsrfFilter extends OncePerRequestFilter {
 
-	private static final String CSRF_COOKIE_NAME = "CSRF-TOKEN";
-	private static final String CSRF_HEADER_NAME = "X-CSRF-TOKEN";
+	public static final String CSRF_COOKIE_NAME = "CSRF-TOKEN";
+	public static final String CSRF_HEADER_NAME = "X-CSRF-TOKEN";
 	
 	private final RequestMatcher requireCsrfProtectionMatcher = new DefaultRequiresCsrfMatcher();
 	private final AccessDeniedHandler accessDeniedHandler = new AccessDeniedHandlerImpl();

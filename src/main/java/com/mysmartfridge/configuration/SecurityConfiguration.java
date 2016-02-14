@@ -12,6 +12,9 @@ import org.springframework.security.web.csrf.CsrfFilter;
 
 import com.mysmartfridge.security.AuthoritiesConstants;
 import com.mysmartfridge.security.ClientStatelessCsrfFilter;
+import com.mysmartfridge.security.RestAuthenticationFailureHandler;
+import com.mysmartfridge.security.RestAuthenticationSuccessHandler;
+import com.mysmartfridge.security.RestLogoutSuccessHandler;
 import com.mysmartfridge.security.UserDetailsService;
 
 
@@ -21,6 +24,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
+	
+	@Autowired
+	private RestAuthenticationFailureHandler restAuthenticationFailureHandler;
+	
+	@Autowired
+	private RestLogoutSuccessHandler restLogoutSuccessHandler;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -47,15 +59,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    	.addFilterBefore(new ClientStatelessCsrfFilter(), CsrfFilter.class)
 	    	.exceptionHandling()
 	    .and()
+	    	.formLogin()
+	    	.loginProcessingUrl("/api/login")
+	    	.successHandler(restAuthenticationSuccessHandler)
+	    	.failureHandler(restAuthenticationFailureHandler)
+	    	.usernameParameter("login")
+	    	.passwordParameter("password")
+	    	.permitAll()
+	    .and()
+	    	.logout()
+	    	.logoutUrl("/api/logout")
+	    	.logoutSuccessHandler(restLogoutSuccessHandler)
+	    	.deleteCookies("JSESSIONID", ClientStatelessCsrfFilter.CSRF_COOKIE_NAME)
+	    	.permitAll()
+	    .and()
 	        .headers()
 	        .frameOptions()
 	        .disable()
 	    .and()
 	        .authorizeRequests()
-	        .antMatchers("/api/recipes/**").permitAll()
 	        .antMatchers(HttpMethod.POST, "/api/recipes").authenticated()
+	        .antMatchers(HttpMethod.GET, "/api/recipes/**").permitAll()
 	        .antMatchers("/manage/**").hasAuthority(AuthoritiesConstants.ADMIN);
-		
 	}
 	
 }
