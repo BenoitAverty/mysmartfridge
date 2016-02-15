@@ -12,6 +12,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 
 import com.mysmartfridge.security.AuthoritiesConstants;
 import com.mysmartfridge.security.ClientStatelessCsrfFilter;
+import com.mysmartfridge.security.Http401UnauthorizedEntryPoint;
 import com.mysmartfridge.security.RestAuthenticationFailureHandler;
 import com.mysmartfridge.security.RestAuthenticationSuccessHandler;
 import com.mysmartfridge.security.RestLogoutSuccessHandler;
@@ -24,6 +25,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private Http401UnauthorizedEntryPoint http401UnauthorizedEntryPoint;
 	
 	@Autowired
 	private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
@@ -52,12 +56,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic()
-	    .and()
+		http
 	    	.csrf()
 	    	.disable()
 	    	.addFilterBefore(new ClientStatelessCsrfFilter(), CsrfFilter.class)
 	    	.exceptionHandling()
+	    	.authenticationEntryPoint(http401UnauthorizedEntryPoint)
 	    .and()
 	    	.formLogin()
 	    	.loginProcessingUrl("/api/login")
@@ -79,7 +83,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .and()
 	        .authorizeRequests()
 	        .antMatchers(HttpMethod.POST, "/api/recipes").authenticated()
-	        .antMatchers(HttpMethod.GET, "/api/recipes/**").permitAll()
+	        .antMatchers(HttpMethod.GET, "/api/recipes").permitAll()
+	        .antMatchers("/api/users/current/**").permitAll()
 	        .antMatchers("/manage/**").hasAuthority(AuthoritiesConstants.ADMIN);
 	}
 	

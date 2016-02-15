@@ -1,16 +1,19 @@
 package com.mysmartfridge.application.dto;
 
-import lombok.AllArgsConstructor;
+import com.mysmartfridge.domain.User;
 
 /**
  * A user as exposed by the application layer.
  * 
  */
-@AllArgsConstructor
 public class UserDto {
 	
-	/** The tid of the user in the system. Represents its identity. */
-	public Long tid;
+	public UserDto(User user) {
+		
+		if(user != null) {
+			this.email = user.getEmail();
+		}
+	}
 	
 	/** Email address of the user. */
 	public String email;

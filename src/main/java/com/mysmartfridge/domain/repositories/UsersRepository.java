@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.mysmartfridge.domain.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UsersRepository extends CrudRepository<User, Long> {
 	
 	/**
 	 * Find a User by its email address.

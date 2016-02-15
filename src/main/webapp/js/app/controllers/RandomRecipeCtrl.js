@@ -14,7 +14,7 @@ module.exports = function(RecipeService) {
   randomize();
 
   // Public methods
-  vm.randomize = randomize();
+  vm.randomize = randomize;
 
   // Implementations
   function randomize() {

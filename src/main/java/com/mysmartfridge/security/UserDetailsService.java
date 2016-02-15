@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.mysmartfridge.domain.User;
-import com.mysmartfridge.domain.repositories.UserRepository;
+import com.mysmartfridge.domain.repositories.UsersRepository;
 
 @Configuration
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -24,7 +24,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 	private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UsersRepository userRepository;
 	
 	@Override
 	@Transactional

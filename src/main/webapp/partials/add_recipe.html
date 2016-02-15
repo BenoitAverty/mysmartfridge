@@ -1,0 +1,49 @@
+<div class="container" data-ng-controller="AddRecipeCtrl as addRecipeCtrl">
+
+
+		<!-- Instructions -->
+		<div class="row">
+				<div class="box">
+						<div class="col-lg-12">
+								<hr>
+								<h2 class="intro-text text-center">Add a Recipe</h2>
+								<hr>
+								<form id="add-recipe" class="form-horizontal">
+                  <div class="form-group">
+										<label for="recipe-title" class="control-label col-sm-offset-2 col-sm-2">Recipe title</label>
+										<div class="col-sm-6">
+											<input type="text" id="recipe-title" name="recipe-title" class="form-control" data-ng-model="addRecipeCtrl.recipe.title" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="recipe-nb-people" class="control-label col-sm-offset-2 col-sm-2">Number of people</label>
+										<div class="col-sm-6">
+											<input type="number" id="recipe-nb-people" name="recipe-nb-people" class="form-control" data-ng-model="addRecipeCtrl.recipe.nbPeople" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="recipe-prep-time" class="control-label col-sm-offset-2 col-sm-2">Preparation time</label>
+										<div class="col-sm-6">
+											<input type="number" id="recipe-prep-time" name="recipe-prep-time" class="form-control" data-ng-model="addRecipeCtrl.recipe.prepTime" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="recipe-prep-time" class="control-label col-sm-offset-2 col-sm-2">Cooking time</label>
+										<div class="col-sm-6">
+											<input type="number" id="recipe-nb-people" name="recipe-nb-people" class="form-control" data-ng-model="addRecipeCtrl.recipe.cookTime" />
+										</div>
+									</div>
+									<div class="form-group">
+									    <div class="col-sm-offset-4 col-sm-6">
+									      <button type="submit" class="btn btn-primary" data-ng-click="addRecipeCtrl.addRecipe()" data-ng-disabled="addRecipeCtrl.working">Submit</button>
+									    </div>
+									  </div>
+                </form>
+						</div>
+				</div>
+		</div>
+
+</div>
+<!-- /.container -->
+
+<script src="js/theme/random_recipe.js"></script>

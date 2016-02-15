@@ -1,6 +1,7 @@
 module.exports = function($http) {
   var serviceInstance = {
-      getRandomRecipe: getRandomRecipe
+      getRandomRecipe: getRandomRecipe,
+      addRecipe: addRecipe
   };
   return serviceInstance;
 
@@ -14,6 +15,21 @@ module.exports = function($http) {
       },
       function(response) {
         error(response.status);
+      }
+    );
+  }
+
+  function addRecipe(recipe, callback, error) {
+    $http({
+      method: 'POST',
+      url: '/api/recipes',
+      data: recipe
+    }).then(
+      function(response) {
+        callback();
+      },
+      function(response) {
+        error();
       }
     );
   }

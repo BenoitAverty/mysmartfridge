@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.mysmartfridge.application.dto.RecipeDto;
 import com.mysmartfridge.domain.Recipe;
-import com.mysmartfridge.domain.repositories.RecipeRepository;
+import com.mysmartfridge.domain.repositories.RecipesRepository;
 
 @Service
 public class RecipesApplication {
 
 	@Autowired
-	private RecipeRepository recipeRepo;
+	private RecipesRepository recipeRepo;
 	
 	/**
 	 * Find a recipe based on its tid
