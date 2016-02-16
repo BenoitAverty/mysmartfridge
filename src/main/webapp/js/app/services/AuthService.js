@@ -6,7 +6,8 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
       doLogout: doLogout,
       isAuthenticated: function() { return isAuthenticated },
       getUserEmail: function() { return email },
-      isAuthorized: isAuthorized
+      isAuthorized: isAuthorized,
+      getAuthInfo: getAuthInfo
   };
 
   //Private part
@@ -27,6 +28,23 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
       function(response) {
         isAuthenticated = true;
         email = login;
+      }
+    )
+  }
+
+  function getAuthInfo() {
+    $http({
+      method: 'GET',
+      url: '/api/users/current'
+    })
+    .then(
+      function(response) {
+        isAuthenticated = true;
+        email = response.data.email;
+      },
+      function(response) {
+        isAuthenticated = false;
+        email = '';
       }
     )
   }
