@@ -28,6 +28,7 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
       function(response) {
         isAuthenticated = true;
         email = login;
+        role = USER_ROLES.user; //TODO retrieve role from api
       }
     )
   }
@@ -41,10 +42,12 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
       function(response) {
         isAuthenticated = true;
         email = response.data.email;
+        role = USER_ROLES.user;
       },
       function(response) {
         isAuthenticated = false;
         email = '';
+        role = '';
       }
     )
   }
@@ -58,14 +61,20 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
       function() {
         isAuthenticated = false;
         email = '';
+        role = '';
       }
     )
   }
 
   function isAuthorized(authorizedRoles) {
+    if(!angular.isDefined(authorizedRoles)) {
+      return true;
+    }
+
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }
+    
     return (isAuthenticated && authorizedRoles.indexOf(role) !== -1);
   }
 }

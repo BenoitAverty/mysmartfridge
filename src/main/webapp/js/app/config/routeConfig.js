@@ -17,5 +17,8 @@ module.exports = function($stateProvider, $urlRouterProvider, USER_ROLES) {
       data: {
         authorizedRoles: [USER_ROLES.user]
       }
+    })
+    .state('login-required', {
+      templateUrl: "partials/login_required.html"
     });
 }
