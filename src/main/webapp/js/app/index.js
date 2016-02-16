@@ -1,11 +1,12 @@
 'use strict';
 
 var angular = require('angular');
-require('angular-route');
+var angularUiRouter = require('angular-ui-router');
 
 // Déclaration du module
-var mysmartfridge = angular.module('mySmartFridge', ['ngRoute']);
+var mysmartfridge = angular.module('mySmartFridge', [angularUiRouter]);
 
-require('./config')
-require('./controllers')
-require('./services')
+require('./config');
+require('./services');
+require('./controllers');
+require('./directives');

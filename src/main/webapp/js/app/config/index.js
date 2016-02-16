@@ -1,4 +1,6 @@
 var mysmartfridge = require('angular').module('mySmartFridge');
 
-mysmartfridge.config(['$routeProvider', require('./routeConfig')]);
-mysmartfridge.config(['$httpProvider', require('./csrfProtectionConfig')])
+require('./constants');
+
+mysmartfridge.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', require('./routeConfig')]);
+mysmartfridge.config(['$httpProvider', require('./csrfProtectionConfig')]);

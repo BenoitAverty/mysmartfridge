@@ -1,4 +1,4 @@
 var app = require('angular').module('mySmartFridge');
 
 app.factory('RecipeService', ['$http', require('./RecipeService')]);
-app.factory('AccountService', ['$http', '$httpParamSerializer', require('./AccountService')]);
+app.factory('AuthService', ['$http', '$httpParamSerializer', '$q', 'USER_ROLES', require('./AuthService')]);

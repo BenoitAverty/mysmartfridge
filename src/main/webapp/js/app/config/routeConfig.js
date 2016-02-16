@@ -1,15 +1,21 @@
-module.exports = function($routeProvider) {
+module.exports = function($stateProvider, $urlRouterProvider, USER_ROLES) {
 
-  $routeProvider.when('/random-recipe', {
-    templateUrl: 'partials/random_recipe.html',
-  })
-  .when('/about', {
-    templateUrl: 'partials/about.html'
-  })
-  .when('/add-recipe', {
-    templateUrl: 'partials/add_recipe.html'
-  })
-  .otherwise({
-    redirectTo: '/random-recipe',
-  });
+  $urlRouterProvider.otherwise("/random-recipe");
+
+  $stateProvider
+    .state('random-recipe', {
+      url: "/random-recipe",
+      templateUrl: "partials/random_recipe.html"
+    })
+    .state('about', {
+      url: "/about",
+      templateUrl: "partials/about.html"
+    })
+    .state('add-recipe', {
+      url: "/add-recipe",
+      templateUrl: "partials/add_recipe.html",
+      data: {
+        authorizedRoles: [USER_ROLES.user]
+      }
+    });
 }

@@ -1,33 +1,8 @@
 <ul class="nav navbar-nav navbar-right" data-ng-controller="AccountCtrl as accountCtrl">
   <li class="dropdown">
     <a href="" class="dropdown-toggle" data-toggle="dropdown"><b>My Account</b> <span class="caret"></span></a>
-    <ul id="login-dp" class="dropdown-menu">
-      <li>
-        <div class="row">
-          <div class="col-md-12">
-            <form accept-charset="UTF-8" id="login-nav">
-              <div class="form-group">
-                <input type="text" class="form-control" id="login" placeholder="Email address or Username" required>
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
-                <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-              </div>
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> keep me logged-in
-                </label>
-              </div>
-            </form>
-          </div>
-          <div class="bottom text-center">
-            New here ? <a href="#"><b>Join Us</b></a>
-          </div>
-        </div>
-      </li>
+    <ul class="dropdown-menu">
+      <li><a href="" data-ng-click="accountCtrl.doLogout()">Logout</a></li>
     </ul>
   </li>
 </ul>
