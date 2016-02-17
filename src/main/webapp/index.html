@@ -41,20 +41,20 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a ui-sref="random-recipe">Random Recipe</a>
+                        <a data-ui-sref="random-recipe">Random Recipe</a>
                     </li>
                     <li>
-                        <a ui-sref="about">About</a>
+                        <a data-ui-sref="about">About</a>
                     </li>
-                    <li is-authenticated>
-                        <a ui-sref="add-recipe">Add a recipe</a>
+                    <li data-is-authenticated="true">
+                        <a data-ui-sref="add-recipe">Add a recipe</a>
                     </li>
                 </ul>
 
                 <!-- account part -->
                 <div data-ng-controller="AccountCtrl as accountCtrl">
-                  <div ng-show="accountCtrl.isAuthenticated()" ng-include="'partials/account_menu.html'"></div>
-                  <div ng-show="!accountCtrl.isAuthenticated()" ng-include="'partials/login_form.html'"></div>
+                  <div data-is-authenticated="true" ng-include="'partials/account_menu.html'"></div>
+                  <div data-is-authenticated="false" ng-include="'partials/login_form.html'"></div>
                 </div>
             </div>
             <!-- /.navbar-collapse -->

@@ -16,6 +16,11 @@ module.exports = function($stateProvider, $urlRouterProvider, USER_ROLES) {
       templateUrl: "partials/add_recipe.html",
       data: {
         authorizedRoles: [USER_ROLES.user]
+      },
+      resolve: {
+        auth: function(AuthService) {
+          return AuthService.getAuthInfo();
+        }
       }
     })
     .state('login-required', {

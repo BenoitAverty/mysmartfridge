@@ -1,4 +1,4 @@
-module.exports = function(AuthService, AUTH_EVENTS, $rootScope) {
+module.exports = function(AuthService) {
   var vm = this;
 
   // Attributes and initialization
@@ -6,7 +6,6 @@ module.exports = function(AuthService, AUTH_EVENTS, $rootScope) {
   // Public methods
   vm.doLogin = doLogin;
   vm.doLogout = doLogout;
-  vm.isAuthenticated = AuthService.isAuthenticated;
 
   // Implementations
   function doLogin() {

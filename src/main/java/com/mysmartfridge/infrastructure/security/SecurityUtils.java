@@ -1,4 +1,4 @@
-package com.mysmartfridge.security;
+package com.mysmartfridge.infrastructure.security;
 
 import java.util.Collection;
 
@@ -38,12 +38,12 @@ public class SecurityUtils {
         Collection<? extends GrantedAuthority> authorities = securityContext.getAuthentication().getAuthorities();
         if (authorities != null) {
             for (GrantedAuthority authority : authorities) {
-                if (authority.getAuthority().equals(AuthoritiesConstants.ANONYMOUS)) {
-                    return false;
+                if (!authority.getAuthority().equals(AuthoritiesConstants.ANONYMOUS)) {
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
     
 	/** Instantiation not possible of an util class **/

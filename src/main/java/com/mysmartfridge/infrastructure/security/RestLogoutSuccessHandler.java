@@ -1,4 +1,4 @@
-package com.mysmartfridge.security;
+package com.mysmartfridge.infrastructure.security;
 
 import java.io.IOException;
 

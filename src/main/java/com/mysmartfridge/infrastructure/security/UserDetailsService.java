@@ -1,8 +1,9 @@
-package com.mysmartfridge.security;
+package com.mysmartfridge.infrastructure.security;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -38,7 +39,11 @@ public class UserDetailsService implements org.springframework.security.core.use
 		
 		return userFromDatabase.map(user -> {
 			List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-			grantedAuthorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.ADMIN));
+			grantedAuthorities.addAll(
+					user.getRole().getWeakerRoles().stream()
+					.map(r -> new SimpleGrantedAuthority(r.toString()))
+					.collect(Collectors.toList())
+				);
 			
 			return new org.springframework.security.core.userdetails.User(lowercaseLogin, user.getPassword(), grantedAuthorities);
 		}).orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));

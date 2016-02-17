@@ -1,4 +1,4 @@
-package com.mysmartfridge.security;
+package com.mysmartfridge.infrastructure.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

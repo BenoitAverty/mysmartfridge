@@ -1,4 +1,4 @@
-module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
+module.exports = function($http, $httpParamSerializer, USER_ROLES) {
 
   // interface
   var serviceInstance = {
@@ -24,17 +24,11 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       data: $httpParamSerializer({"login": login, "password": password})
     })
-    .then(
-      function(response) {
-        isAuthenticated = true;
-        email = login;
-        role = USER_ROLES.user; //TODO retrieve role from api
-      }
-    )
+    .then(getAuthInfo);
   }
 
   function getAuthInfo() {
-    $http({
+    return $http({
       method: 'GET',
       url: '/api/users/current'
     })
@@ -42,28 +36,26 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
       function(response) {
         isAuthenticated = true;
         email = response.data.email;
-        role = USER_ROLES.user;
+        role = response.data.role;
       },
-      function(response) {
-        isAuthenticated = false;
-        email = '';
-        role = '';
-      }
-    )
+      purgeAuthenticationInfo
+    );
   }
 
+  // Log the user out of the api and the application.
   function doLogout() {
     return $http({
       method: 'POST',
       url: '/api/logout'
     })
-    .then(
-      function() {
-        isAuthenticated = false;
-        email = '';
-        role = '';
-      }
-    )
+    .then(purgeAuthenticationInfo);
+  }
+
+  // Purge the user informations, on logout or login failure.
+  function purgeAuthenticationInfo() {
+    isAuthenticated = false;
+    email = '';
+    role = USER_ROLES.anonymous;
   }
 
   function isAuthorized(authorizedRoles) {
@@ -74,7 +66,7 @@ module.exports = function($http, $httpParamSerializer, $q, USER_ROLES) {
     if (!angular.isArray(authorizedRoles)) {
       authorizedRoles = [authorizedRoles];
     }
-    
+
     return (isAuthenticated && authorizedRoles.indexOf(role) !== -1);
   }
 }

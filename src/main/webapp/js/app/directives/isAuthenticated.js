@@ -14,7 +14,7 @@ module.exports = function(AuthService) {
           setVisible();
         }
 
-        if(AuthService.isAuthenticated()) {
+        if((args.isAuthenticated==="true") === AuthService.isAuthenticated()) {
           setVisible();
         }
         else {

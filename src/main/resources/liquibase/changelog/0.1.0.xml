@@ -77,7 +77,13 @@
 			<column name="email" type="varchar(255)">
 				<constraints nullable="false" unique="true" />
 			</column>
-			<column name="password" type="varchar(255)">
+			<column name="username" type="varchar(255)">
+				<constraints nullable="true" unique="false" />
+			</column>
+			<column name="password" type="varchar(60)">
+				<constraints nullable="false" />
+			</column>
+			<column name="role" type="varchar(255)">
 				<constraints nullable="false" />
 			</column>
 		</createTable>

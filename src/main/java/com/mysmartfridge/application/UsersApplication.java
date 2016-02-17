@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mysmartfridge.application.dto.UserDto;
 import com.mysmartfridge.domain.repositories.UsersRepository;
-import com.mysmartfridge.security.SecurityUtils;
+import com.mysmartfridge.infrastructure.security.SecurityUtils;
 
 /**
  * Application layer related to manipulation of users (as a domain entity or as a technical device).
