@@ -8,6 +8,12 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.experimental.UtilityClass;
+
+/**
+ * Util functions related to security.
+ */
+@UtilityClass
 public class SecurityUtils {
 	
 	/**
@@ -45,9 +51,4 @@ public class SecurityUtils {
         }
         return false;
     }
-    
-	/** Instantiation not possible of an util class **/
-	private SecurityUtils() {
-		
-	}
 }

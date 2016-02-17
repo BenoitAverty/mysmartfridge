@@ -21,7 +21,16 @@ import com.mysmartfridge.infrastructure.security.RestAuthenticationSuccessHandle
 import com.mysmartfridge.infrastructure.security.RestLogoutSuccessHandler;
 import com.mysmartfridge.infrastructure.security.UserDetailsService;
 
-
+/**
+ * Configuration of the application's security.
+ * 
+ * <ul>
+ * 	<li>Definition of a password encoder (BCryptPasswordEncoder is used)</li>
+ * 	<li>Configuration of spring security's user details service to use the custom one (see {@link UserDetailsService})</li>
+ * 	<li>Ignore static resource for web security</li>
+ * 	<li>Configure api security (see {@link #configure(HttpSecurity)})</li>
+ * </ul>
+ */
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -51,7 +60,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 	
-	
+	/**
+	 * Ignore statuc resources for security.  
+	 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
@@ -63,6 +74,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/console/**");
 	}
 	
+	/**
+	 * Configuration of the api security.
+	 * 
+	 * <ul>
+	 * 	<li>CSRF protection using a custom client side CSRF protection;</li>
+	 * 	<li>Login/logout endpoints and customs handlers for a REST api;</li>
+	 * 	<li>Authorizations necessary for each api endpoint.</li>
+	 * </ul>
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http

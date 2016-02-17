@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mysmartfridge.application.UsersApplication;
 import com.mysmartfridge.application.dto.UserDto;
 
+/**
+ * REST controller of the Users resource.
+ */
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
@@ -23,6 +26,11 @@ public class UsersController {
 	@Autowired
 	private UsersApplication usersApplication;
 	
+	/**
+	 * GET /api/users/current endpoint. Returns the currrently logged in user.
+	 * 
+	 * @return A ResponseEntity containing the currently logged in user (see {@link UserDto}) or a 404 error if no user is currently logged in.
+	 */
 	@RequestMapping(value="/current", method=RequestMethod.GET)
 	public ResponseEntity<UserDto> getUsersCurrent() {
 		

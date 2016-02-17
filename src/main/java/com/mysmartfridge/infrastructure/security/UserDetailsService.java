@@ -19,24 +19,33 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.mysmartfridge.domain.User;
 import com.mysmartfridge.domain.repositories.UsersRepository;
 
+/**
+ * Service used by spring security to retrieve user details. This service is
+ * able to retrieve a domain model User and convert it to spring security object
+ * UserDetails.
+ */
 @Configuration
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
-	
+
 	private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
-	
+
 	@Autowired
 	private UsersRepository userRepository;
-	
+
+	/**
+	 * Finds a user by its username, and returns a spring security UserDetails
+	 * object.
+	 */
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
-		
+
 		log.debug("Authenticating {}", login);
-		
+
 		String lowercaseLogin = login.toLowerCase();
-		
+
 		Optional<User> userFromDatabase = userRepository.findByEmail(lowercaseLogin);
-		
+
 		return userFromDatabase.map(user -> {
 			List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 			grantedAuthorities.addAll(
@@ -44,11 +53,10 @@ public class UserDetailsService implements org.springframework.security.core.use
 					.map(r -> new SimpleGrantedAuthority(r.toString()))
 					.collect(Collectors.toList())
 				);
-			
+
 			return new org.springframework.security.core.userdetails.User(lowercaseLogin, user.getPassword(), grantedAuthorities);
-		}).orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));
+		})
+		.orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));
 	}
-	
-	
-	
+
 }

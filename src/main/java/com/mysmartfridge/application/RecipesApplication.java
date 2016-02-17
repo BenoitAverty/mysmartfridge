@@ -9,6 +9,9 @@ import com.mysmartfridge.application.dto.RecipeDto;
 import com.mysmartfridge.domain.Recipe;
 import com.mysmartfridge.domain.repositories.RecipesRepository;
 
+/**
+ * Application layer related to Recipes.
+ */
 @Service
 public class RecipesApplication {
 
