@@ -3,21 +3,43 @@ module.exports = function(RecipeService) {
 
   // Attributes and initialization
   vm.recipe = {
-    title: '',
-    nbPeople: 0,
-    prepTime: 0,
-    cookTime: 0
+    title: 'Test',
+    nbPeople: 4,
+    prepTime: 20,
+    cookTime: 15,
+    ingredients: ['500g de sucre', '1kg de farine'],
+    steps: ['Étape 1', 'Étape 2']
   }
 
-  vm.adding=true;
+  vm.working=false;
 
   // Public methods
   vm.addRecipe = addRecipe;
+  vm.addIngredient = addIngredient;
+  vm.removeIngredient = removeIngredient;
+  vm.addStep = addStep;
+  vm.removeStep = removeStep;
 
   // Implementations
+  function addIngredient() {
+    vm.recipe.ingredients.push('');
+  }
+
+  function removeIngredient(index) {
+    vm.recipe.ingredients.splice(index, 1);
+  }
+
+  function addStep() {
+    vm.recipe.steps.push('');
+  }
+
+  function removeStep(index) {
+    vm.recipe.steps.splice(index, 1);
+  }
+
   function addRecipe() {
-    vm.adding = true;
-    RecipeService.addRecipe(vm.recipe, handleSuccess, handleFailure);
+    vm.working = true;
+    RecipeService.addRecipe(vm.recipe).then(handleSuccess, handleFailure);
   }
 
   function handleSuccess() {

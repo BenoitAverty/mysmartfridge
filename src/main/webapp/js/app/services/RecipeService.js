@@ -19,18 +19,14 @@ module.exports = function($http) {
     );
   }
 
-  function addRecipe(recipe, callback, error) {
-    $http({
+  /**
+   * Calls the api endpoint to add a recipe and returns a promise.
+   */
+  function addRecipe(recipe) {
+    return $http({
       method: 'POST',
       url: '/api/recipes',
       data: recipe
-    }).then(
-      function(response) {
-        callback();
-      },
-      function(response) {
-        error();
-      }
-    );
+    });
   }
 }
