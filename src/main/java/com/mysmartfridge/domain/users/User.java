@@ -1,4 +1,4 @@
-package com.mysmartfridge.domain;
+package com.mysmartfridge.domain.users;
 
 import java.io.Serializable;
 

@@ -2,21 +2,27 @@ package com.mysmartfridge.application;
 
 import java.security.SecureRandom;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mysmartfridge.application.dto.RecipeDto;
-import com.mysmartfridge.domain.Recipe;
-import com.mysmartfridge.domain.repositories.RecipesRepository;
+import com.mysmartfridge.domain.recipes.IngredientParser;
+import com.mysmartfridge.domain.recipes.Recipe;
+import com.mysmartfridge.domain.recipes.RecipesRepository;
 
 /**
  * Application layer related to Recipes.
  */
 @Service
 public class RecipesApplication {
-
+	
 	@Autowired
 	private RecipesRepository recipeRepo;
+	
+	@Autowired
+	private IngredientParser ingredientParser;
 	
 	/**
 	 * Find a recipe based on its tid
@@ -34,9 +40,13 @@ public class RecipesApplication {
 	 * @param recipeDto the recipe to create.
 	 * @return a RecipeDto representing the created recipe.
 	 */
+	@Transactional
 	public RecipeDto createRecipe(RecipeDto recipeDto) {
 
 		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.nbPeople, recipeDto.prepTime, recipeDto.cookTime);
+		
+		recipeDto.ingredients.stream().map(ingredientParser::parse).forEach(newRecipe::addIngredient);
+		
 		recipeRepo.save(newRecipe);
 		
 		return new RecipeDto(newRecipe);

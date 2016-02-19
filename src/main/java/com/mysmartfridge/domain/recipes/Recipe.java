@@ -1,16 +1,21 @@
-package com.mysmartfridge.domain;
+package com.mysmartfridge.domain.recipes;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -53,7 +58,10 @@ public class Recipe implements Serializable {
 	@Getter
 	private int cookTime;
 
-	@OneToMany(mappedBy="recipe")
+	@ElementCollection(targetClass=Ingredient.class)
+	@JoinTable(name="ingredients")
+	@JoinColumn(name="recipe_tid", referencedColumnName="tid")
+	@Getter
 	private Set<Ingredient> ingredients;
 
 	@OneToMany(mappedBy="recipe")
@@ -76,6 +84,26 @@ public class Recipe implements Serializable {
 		this.ingredients = new HashSet<>();
 		this.steps = new HashSet<>();
 	}
+	
+	/**
+	 * Add an {@link Ingredient} to this recipe.
+	 * 
+	 * @param ingredient the ingredient to add
+	 */
+	public void addIngredient(Ingredient ingredient) {
+		this.ingredients.add(ingredient);
+	}
+	
+	/**
+	 * Add several {@link Ingredient}s to this recipe.
+	 * 
+	 * @param ingredients the ingredients to add
+	 */
+	public void addIngredients(Collection<Ingredient> ingredients) {
+		for(Ingredient i : ingredients) {
+			this.addIngredient(i);
+		}
+	}
 
 	/**
 	 * Return the steps of the recipe as an iterable.
@@ -89,12 +117,5 @@ public class Recipe implements Serializable {
 				)
 				.collect(Collectors.toList());
 
-	}
-
-	/**
-	 * Return the ingredients of the recipe as strings.
-	 */
-	public List<String> getIngredients() {
-		return ingredients.stream().map(i -> i.toString()).collect(Collectors.toList());
 	}
 }

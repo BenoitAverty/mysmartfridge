@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mysmartfridge.application.dto.UserDto;
-import com.mysmartfridge.domain.repositories.UsersRepository;
+import com.mysmartfridge.domain.users.UsersRepository;
 import com.mysmartfridge.infrastructure.security.SecurityUtils;
 
 /**

@@ -24,7 +24,7 @@ public class RecipesController {
 	RecipesApplication recipeApp;
 	
 	@RequestMapping(value="/{tid}", method=RequestMethod.GET)
-	public ResponseEntity<RecipeDto> getRecipes(@PathVariable("tid") long tid) {
+	public ResponseEntity<RecipeDto> getRecipesTid(@PathVariable("tid") long tid) {
 		return new ResponseEntity<RecipeDto>(recipeApp.findARecipe(tid), HttpStatus.OK);
 	}
 	

@@ -1,6 +1,6 @@
 package com.mysmartfridge.infrastructure.security;
 
-import com.mysmartfridge.domain.Role;
+import com.mysmartfridge.domain.users.Role;
 
 /** 
  * Constants for different authorities known to spring security.

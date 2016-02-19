@@ -16,8 +16,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.mysmartfridge.domain.User;
-import com.mysmartfridge.domain.repositories.UsersRepository;
+import com.mysmartfridge.domain.users.User;
+import com.mysmartfridge.domain.users.UsersRepository;
 
 /**
  * Service used by spring security to retrieve user details. This service is

@@ -1,4 +1,4 @@
-package com.mysmartfridge.domain;
+package com.mysmartfridge.domain.users;
 
 import java.util.Set;
 import java.util.stream.Collectors;

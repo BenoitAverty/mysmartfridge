@@ -3,7 +3,7 @@ package com.mysmartfridge.infrastructure.persistence;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import com.mysmartfridge.domain.Role;
+import com.mysmartfridge.domain.users.Role;
 
 /**
  * Converter between a Role domain object and a String stored in databse.
