@@ -36,7 +36,7 @@ public class QuantityConverter implements AttributeConverter<Quantity, String> {
 		
 		Double value = Double.parseDouble(dbValue);
 		
-		return new Quantity(unit, value);
+		return new Quantity(value, unit);
 	}
 
 }

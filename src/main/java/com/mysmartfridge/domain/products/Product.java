@@ -32,4 +32,11 @@ public class Product {
 	@Column
 	@Getter
 	private String name;
+	
+	/**
+	 * Constructs of a product by name.
+	 */
+	public Product(String n) {
+		name = n;
+	}
 }

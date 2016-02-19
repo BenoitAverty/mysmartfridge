@@ -13,21 +13,32 @@ import com.mysmartfridge.Utils;
 import com.mysmartfridge.application.RecipesApplication;
 import com.mysmartfridge.application.dto.RecipeDto;
 
+/**
+ * Endpoint for the Recipe resource.
+ * 
+ * The Recipe resource is equivalent to the {@link RecipeDto} class exposed by the application layer. No mapping is done at the controller layer.
+ */
 @RestController
 @RequestMapping(value="/api/recipes")
 public class RecipesController {
 
 	/**
-	 * Application for the recipes.
+	 * Application layer for the recipes.
 	 */
 	@Autowired
 	RecipesApplication recipeApp;
 	
+	/** 
+	 * Get a particular recipe from its tid.
+	 */
 	@RequestMapping(value="/{tid}", method=RequestMethod.GET)
 	public ResponseEntity<RecipeDto> getRecipesTid(@PathVariable("tid") long tid) {
 		return new ResponseEntity<RecipeDto>(recipeApp.findARecipe(tid), HttpStatus.OK);
 	}
 	
+	/**
+	 * Create a recipe from the json equivalent of a {@link RecipeDto}.
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> postRecipes(@RequestBody RecipeDto dto) {
 		
@@ -37,6 +48,9 @@ public class RecipesController {
 		
 	}
 	
+	/**
+	 * Get a random recipe.
+	 */
 	@RequestMapping(value="/random", method=RequestMethod.GET)
 	public ResponseEntity<RecipeDto> getRecipesRandom() {
 		return new ResponseEntity<RecipeDto>(recipeApp.findRandomRecipe(), HttpStatus.OK);
