@@ -3,6 +3,7 @@ package com.mysmartfridge.application.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.mysmartfridge.domain.recipes.Ingredient;
 import com.mysmartfridge.domain.recipes.Recipe;
 
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class RecipeDto {
 		this.nbPeople = recipe.getNbPeople();
 		this.prepTime = recipe.getPrepTime();
 		this.cookTime = recipe.getCookTime();
-		this.ingredients = recipe.getIngredients().stream().map(i -> i.toString()).collect(Collectors.toList());
+		this.ingredients = recipe.getIngredients().stream().map(IngredientDto::new).collect(Collectors.toList());
 		this.steps = recipe.getSteps();
 	}
 
@@ -43,8 +44,29 @@ public class RecipeDto {
 	public int cookTime;
 	
 	/** Ingredients. */
-	public List<String> ingredients;
+	public List<IngredientDto> ingredients;
 	
 	/** Html instructions of the recipe. */
 	public List<String> steps;
+	
+	/**
+	 * Dto for the ingredients of the recipe.
+	 */
+	public class IngredientDto {
+		
+		public IngredientDto(Ingredient i) {
+			this.quantity = i.getQuantity().getValue();
+			this.unit = i.getQuantity().getUnit().name();
+			this.product = i.getProduct().getName();
+		}
+		
+		/** Quantity of the ingredient. */
+		public Double quantity;
+		
+		/** Unit the quantity is in. */
+		public String unit;
+		
+		/** Name of the product that's in the recipe. */
+		public String product;
+	}
 }

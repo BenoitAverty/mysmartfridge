@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -58,63 +57,70 @@ public class Recipe implements Serializable {
 	@Getter
 	private int cookTime;
 
-	@ElementCollection(targetClass=Ingredient.class)
-	@JoinTable(name="ingredients")
-	@JoinColumn(name="recipe_tid", referencedColumnName="tid")
+	@ElementCollection(targetClass = Ingredient.class)
+	@JoinTable(name = "ingredients")
+	@JoinColumn(name = "recipe_tid", referencedColumnName = "tid")
 	@Getter
 	private Set<Ingredient> ingredients;
 
-	@OneToMany(mappedBy="recipe")
+	@OneToMany(mappedBy = "recipe")
 	private Set<Step> steps;
 
 	/**
 	 * Create a recipe with specified parameters and no ingredients nor steps.
 	 * 
-	 * @param title The name of the recipe
-	 * @param nbPeople The number of people the recipe is designed for
-	 * @param prepTime The time needed to prepare the recipe
-	 * @param cookTime The time needed in the oven or on the stove to cook the recipe.
+	 * @param title
+	 *            The name of the recipe
+	 * @param nbPeople
+	 *            The number of people the recipe is designed for
+	 * @param prepTime
+	 *            The time needed to prepare the recipe
+	 * @param cookTime
+	 *            The time needed in the oven or on the stove to cook the
+	 *            recipe.
 	 */
 	public Recipe(String title, int nbPeople, int prepTime, int cookTime) {
 		this.title = title;
 		this.nbPeople = nbPeople;
 		this.prepTime = prepTime;
 		this.cookTime = cookTime;
-		
+
 		this.ingredients = new HashSet<>();
 		this.steps = new HashSet<>();
 	}
-	
+
 	/**
 	 * Add an {@link Ingredient} to this recipe.
 	 * 
-	 * @param ingredient the ingredient to add
+	 * @param ingredient
+	 *            the ingredient to add
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		this.ingredients.add(ingredient);
 	}
-	
+
 	/**
 	 * Add several {@link Ingredient}s to this recipe.
 	 * 
-	 * @param ingredients the ingredients to add
+	 * @param ingredients
+	 *            the ingredients to add
 	 */
 	public void addIngredients(Collection<Ingredient> ingredients) {
-		for(Ingredient i : ingredients) {
+		for (Ingredient i : ingredients) {
 			this.addIngredient(i);
 		}
 	}
 
 	/**
-	 * Return the steps of the recipe as an iterable.
+	 * Return the list of steps of the recipe.
 	 * 
-	 * The steps are sorted according to their order attribute.
+	 * The steps are sorted according to their index attribute.
 	 */
 	public List<String> getSteps() {
 
-		return steps.stream().sorted(
-					(s1, s2) -> Integer.compare(s1.getIndex(), s2.getIndex())).map(s -> s.getText()
-				)
+		return steps.stream()
+				.sorted((s1, s2) -> Integer.compare(s1.getIndex(), s2.getIndex()))
+				.map(s -> s.getText())
 				.collect(Collectors.toList());
 
 	}

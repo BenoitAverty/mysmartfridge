@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mysmartfridge.application.dto.RecipeDto;
-import com.mysmartfridge.domain.recipes.IngredientParser;
+import com.mysmartfridge.domain.recipes.IngredientFactory;
 import com.mysmartfridge.domain.recipes.Recipe;
 import com.mysmartfridge.domain.recipes.RecipesRepository;
 
@@ -32,7 +32,7 @@ public class RecipesApplication {
 	 * Domain service used to parse Ingredients from string inputs into domain objects.
 	 */
 	@Autowired
-	private IngredientParser ingredientParser;
+	private IngredientFactory ingredientParser;
 
 	/**
 	 * Find a recipe based on its tid
@@ -57,7 +57,9 @@ public class RecipesApplication {
 
 		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.nbPeople, recipeDto.prepTime, recipeDto.cookTime);
 
-		recipeDto.ingredients.stream().map(ingredientParser::parse).forEach(newRecipe::addIngredient);
+		recipeDto.ingredients.stream()
+			.map(dto -> ingredientParser.build(dto.quantity, dto.unit, dto.product))
+			.forEach(newRecipe::addIngredient);
 
 		recipeRepo.save(newRecipe);
 
