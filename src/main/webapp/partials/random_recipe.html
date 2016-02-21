@@ -33,7 +33,13 @@
 								<hr class="tagline-divider" />
 								<aside class="recipe-info">
 									<ul>
-										<li>Pour {{randomRecipeCtrl.recipe.nbPeople}} Personnes</li>
+										<li>
+											<ng-pluralize count="randomRecipeCtrl.recipe.nbPeople"
+											when="{
+												'1': 'Pour une personne',
+												'other': 'Pour {} personnes'
+											}"></ng-pluralize>
+										</li>
 										<li>Préparation : {{randomRecipeCtrl.recipe.prepTime}} minutes</li>
 										<li>Cuisson : {{randomRecipeCtrl.recipe.cookTime}} minutes</li>
 									</ul>

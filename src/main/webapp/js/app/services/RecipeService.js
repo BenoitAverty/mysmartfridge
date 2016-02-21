@@ -5,16 +5,16 @@ module.exports = function($http) {
   };
   return serviceInstance;
 
-  function getRandomRecipe(callback, error) {
-    $http({
+  function getRandomRecipe() {
+    return $http({
       method: 'GET',
       url: '/api/recipes/random'
     }).then(
       function(response) {
-        callback(response.data);
+        return response.data;
       },
       function(response) {
-        error(response.status);
+        return response.status;
       }
     );
   }

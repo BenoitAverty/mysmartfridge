@@ -1,4 +1,4 @@
-module.exports = function(RecipeService) {
+module.exports = function(RecipeService, IngredientFormatter) {
   var vm = this;
 
   // Attributes and initialization
@@ -18,13 +18,13 @@ module.exports = function(RecipeService) {
 
   // Implementations
   function randomize() {
-    RecipeService.getRandomRecipe(
+    RecipeService.getRandomRecipe().then(
       function(recipe) {
-        angular.extend(vm.recipe, recipe)
-      },
-      function(status) {
-        // Show error ?
+        angular.extend(vm.recipe, recipe);
+        vm.recipe.ingredients = vm.recipe.ingredients.map(function(item) {
+          return IngredientFormatter.format(item);
+        });
       }
-    )
+    );
   }
 }
