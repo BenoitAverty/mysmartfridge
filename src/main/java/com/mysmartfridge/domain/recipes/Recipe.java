@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,7 +32,7 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Table(name = "Recipes")
-@NoArgsConstructor
+@NoArgsConstructor(access=AccessLevel.PRIVATE)
 public class Recipe implements Serializable {
 
 	private static final long serialVersionUID = -3895773238629033452L;

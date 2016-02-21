@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * This entity represents a product that can be used in a recipe.
@@ -17,6 +19,7 @@ import lombok.Getter;
  */
 @Entity
 @Table(name="products")
+@NoArgsConstructor(access=AccessLevel.PRIVATE)
 public class Product {
 
 	/**

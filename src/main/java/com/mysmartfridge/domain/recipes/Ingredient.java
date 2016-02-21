@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import com.mysmartfridge.domain.products.Product;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,7 +24,7 @@ import lombok.NoArgsConstructor;
  * </ul>
  */
 @Embeddable
-@NoArgsConstructor
+@NoArgsConstructor(access=AccessLevel.PRIVATE)
 public class Ingredient implements Serializable {
 	
 	private static final long serialVersionUID = -1040899094370022361L;
