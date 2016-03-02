@@ -1,8 +1,7 @@
 package com.mysmartfridge.application;
 
 import java.security.SecureRandom;
-
-import javax.transaction.Transactional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,6 @@ public class RecipesApplication {
 	 *            the recipe to create.
 	 * @return a RecipeDto representing the created recipe.
 	 */
-	@Transactional
 	public RecipeDto createRecipe(RecipeDto recipeDto) {
 
 		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.nbPeople, recipeDto.prepTime, recipeDto.cookTime);
@@ -71,20 +69,11 @@ public class RecipesApplication {
 	 */
 	public RecipeDto findRandomRecipe() {
 
-		Iterable<Recipe> allRecipes = recipeRepo.findAll();
+		List<Recipe> allRecipes = recipeRepo.findAll();
 
 		SecureRandom rand = new SecureRandom();
-		double min = 1.0;
-		Recipe chosenRecipe = null;
-		for (Recipe recipe : allRecipes) {
-			double cur = rand.nextDouble();
-			if (cur < min) {
-				min = cur;
-				chosenRecipe = recipe;
-			}
-		}
-
-		return new RecipeDto(chosenRecipe);
+		
+		return allRecipes.isEmpty() ? null : new RecipeDto(allRecipes.get(rand.nextInt(allRecipes.size())));
 	}
 
 }

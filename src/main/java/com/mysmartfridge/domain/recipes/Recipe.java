@@ -7,16 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -30,8 +22,7 @@ import lombok.NoArgsConstructor;
  * the recipe.
  * 
  */
-@Entity
-@Table(name = "Recipes")
+@Document(collection = "recipes")
 @NoArgsConstructor(access=AccessLevel.PRIVATE)
 public class Recipe implements Serializable {
 
@@ -39,32 +30,23 @@ public class Recipe implements Serializable {
 
 	@Id
 	@Getter
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long tid;
 
-	@Column
 	@Getter
 	private String title;
 
-	@Column
 	@Getter
 	private int nbPeople;
 
-	@Column
 	@Getter
 	private int prepTime;
 
-	@Column
 	@Getter
 	private int cookTime;
 
-	@ElementCollection(targetClass = Ingredient.class)
-	@JoinTable(name = "ingredients")
-	@JoinColumn(name = "recipe_tid", referencedColumnName = "tid")
 	@Getter
 	private Set<Ingredient> ingredients;
 
-	@OneToMany(mappedBy = "recipe")
 	private Set<Step> steps;
 
 	/**

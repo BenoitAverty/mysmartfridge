@@ -2,11 +2,11 @@ package com.mysmartfridge.domain.users;
 
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersRepository extends CrudRepository<User, Long> {
+public interface UsersRepository extends MongoRepository<User, Long> {
 	
 	/**
 	 * Find a User by its email address.

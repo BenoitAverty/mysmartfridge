@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +35,6 @@ public class UserDetailsService implements org.springframework.security.core.use
 	 * object.
 	 */
 	@Override
-	@Transactional
 	public UserDetails loadUserByUsername(final String login) throws UsernameNotFoundException {
 
 		log.debug("Authenticating {}", login);
