@@ -2,8 +2,6 @@ package com.mysmartfridge.domain.recipes;
 
 import java.io.Serializable;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
 import com.mysmartfridge.domain.products.Product;
 
 import lombok.AccessLevel;

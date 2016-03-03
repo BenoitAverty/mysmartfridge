@@ -4,8 +4,7 @@ spring:
   data:
     mongodb:
       database: mysmartfridge
-      host: localhost
-      port: 27017
+      port: 0 # use a random free port for the embedded mongodb
 server: 
   port: 8080
 logging:

@@ -11,13 +11,13 @@ module.exports = function() {
 
   function init() {
     units = {
-      "GRAM": ["gramme de", "grammes de"],
-  		"KILOGRAM": ["kilo de", "kilos de"],
-  		"LITER": ["litre de", "litres de"],
-  		"MILLILITER": ["millilitre de", "millilitres de"],
+      "GRAM": ["gramme", "grammes"],
+  		"KILOGRAM": ["kilo", "kilos"],
+  		"LITER": ["litre", "litres"],
+  		"MILLILITER": ["millilitre", "millilitres"],
   		"NO_UNIT": ["",""],
-  		"TABLESPOON": ["cuillère à café de", "cuillères à café de"],
-  		"CUP": ["verre de", "verres de"]
+  		"TABLESPOON": ["cuillère à café", "cuillères à café"],
+  		"CUP": ["verre", "verres"]
     }
   }
 
@@ -29,6 +29,10 @@ module.exports = function() {
     var unit = ingredient.unit;
     var product = ingredient.product;
 
-    return quantity + ' ' + ((quantity != 1) ? units[unit][1] : units[unit][0]) + " " + product;
+    return {
+      quantity: quantity,
+      product: product,
+      unit: (quantity !== 1) ? units[unit][1] : units[unit][0]
+    };
   }
 }
