@@ -20,7 +20,7 @@ public class Product {
 	 * tid of the product.
 	 */
 	@Id
-	private Long tid;
+	private Integer tid;
 	
 	/**
 	 * Name of the product/

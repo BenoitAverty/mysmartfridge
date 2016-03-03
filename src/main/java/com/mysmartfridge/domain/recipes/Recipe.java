@@ -1,10 +1,9 @@
 package com.mysmartfridge.domain.recipes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.data.annotation.Id;
@@ -30,7 +29,7 @@ public class Recipe implements Serializable {
 
 	@Id
 	@Getter
-	private long tid;
+	private Integer tid;
 
 	@Getter
 	private String title;
@@ -45,9 +44,9 @@ public class Recipe implements Serializable {
 	private int cookTime;
 
 	@Getter
-	private Set<Ingredient> ingredients;
+	private List<Ingredient> ingredients;
 
-	private Set<Step> steps;
+	private List<Step> steps;
 
 	/**
 	 * Create a recipe with specified parameters and no ingredients nor steps.
@@ -68,8 +67,8 @@ public class Recipe implements Serializable {
 		this.prepTime = prepTime;
 		this.cookTime = cookTime;
 
-		this.ingredients = new HashSet<>();
-		this.steps = new HashSet<>();
+		this.ingredients = new ArrayList<>();
+		this.steps = new ArrayList<>();
 	}
 
 	/**

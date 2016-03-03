@@ -18,7 +18,7 @@ public class User implements Serializable {
 	 * Identity of the user in the system.
 	 */
 	@Getter
-	private long tid;
+	private Integer tid;
 
 	/**
 	 * Email address of the user.

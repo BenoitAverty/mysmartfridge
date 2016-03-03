@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.mapping.model.CamelCaseSplittingFieldNamingStrategy;
+import org.springframework.data.mapping.model.FieldNamingStrategy;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
@@ -21,6 +23,11 @@ import com.mongodb.Mongo;
 public class DatabaseConfiguration extends AbstractMongoConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
+    
+    @Override
+    protected FieldNamingStrategy fieldNamingStrategy() {
+    	return new CamelCaseSplittingFieldNamingStrategy("_");
+    }
     
     @Autowired
     private Mongo mongo;
