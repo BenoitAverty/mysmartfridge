@@ -1,5 +1,7 @@
 package com.mysmartfridge.domain.products;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,7 +22,8 @@ public class Product {
 	 * tid of the product.
 	 */
 	@Id
-	private Integer tid;
+	@Getter
+	private UUID uuid;
 	
 	/**
 	 * Name of the product/

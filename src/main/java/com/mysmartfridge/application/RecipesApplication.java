@@ -2,6 +2,7 @@ package com.mysmartfridge.application;
 
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,12 +37,12 @@ public class RecipesApplication {
 	/**
 	 * Find a recipe based on its tid
 	 * 
-	 * @param tid
-	 *            the tid of the recipe to find
+	 * @param uuid
+	 *            the uuid of the recipe to find
 	 * @return a RecipeDto representing the found recipe
 	 */
-	public RecipeDto findARecipe(long tid) {
-		return new RecipeDto(recipeRepo.findOne(tid));
+	public RecipeDto findARecipe(UUID uuid) {
+		return new RecipeDto(recipeRepo.findOne(uuid));
 	}
 
 	/**

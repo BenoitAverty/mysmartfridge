@@ -1,7 +1,9 @@
 package com.mysmartfridge.domain.users;
 
 import java.io.Serializable;
+import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Getter;
@@ -18,7 +20,8 @@ public class User implements Serializable {
 	 * Identity of the user in the system.
 	 */
 	@Getter
-	private Integer tid;
+	@Id
+	private UUID uuid;
 
 	/**
 	 * Email address of the user.

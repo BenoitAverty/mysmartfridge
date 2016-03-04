@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.data.annotation.Id;
@@ -29,7 +30,7 @@ public class Recipe implements Serializable {
 
 	@Id
 	@Getter
-	private Integer tid;
+	private UUID uuid;
 
 	@Getter
 	private String title;
