@@ -2,10 +2,6 @@ package com.mysmartfridge.domain.recipes;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import com.mysmartfridge.domain.products.Product;
 
 import lombok.AccessLevel;
@@ -23,7 +19,6 @@ import lombok.NoArgsConstructor;
  * 	<li>No identity (No need to find an ingredient by itself, always through recipe)</li>
  * </ul>
  */
-@Embeddable
 @NoArgsConstructor(access=AccessLevel.PRIVATE)
 public class Ingredient implements Serializable {
 	
@@ -38,8 +33,6 @@ public class Ingredient implements Serializable {
 	/**
 	 * The product present in the recipe.
 	 */
-	@ManyToOne
-	@JoinColumn(name="product_tid")
 	@Getter
 	private Product product;
 	

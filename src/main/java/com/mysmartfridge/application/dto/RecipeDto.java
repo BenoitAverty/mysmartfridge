@@ -1,6 +1,7 @@
 package com.mysmartfridge.application.dto;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.mysmartfridge.domain.recipes.Ingredient;
@@ -19,7 +20,7 @@ public class RecipeDto {
 	 * @param recipe the domain Recipe the dto will be based on.
 	 */
 	public RecipeDto(Recipe recipe) {
-		this.tid = recipe.getTid();
+		this.uuid = recipe.getUuid();
 		this.title = recipe.getTitle();
 		this.nbPeople = recipe.getNbPeople();
 		this.prepTime = recipe.getPrepTime();
@@ -28,8 +29,8 @@ public class RecipeDto {
 		this.steps = recipe.getSteps();
 	}
 
-	/** tid of the recipe. This attribute represents the identity of a recipe. */
-	public long tid;
+	/** uuid of the recipe. This attribute represents the identity of a recipe. */
+	public UUID uuid;
 	
 	/** Title of the recipe. */
 	public String title;

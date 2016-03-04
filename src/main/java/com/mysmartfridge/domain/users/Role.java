@@ -8,10 +8,7 @@ import java.util.stream.Stream;
  * Represent a role that a user can have in the application.
  */
 public enum Role {
-	ANONYMOUS("ROLE_ANONYMOUS", 10), USER("ROLE_USER", 20), ADMIN("ROLE_ADMIN", 30);
-
-	/** label of the role, used for serialization. */
-	private String label;
+	ROLE_ANONYMOUS(10), ROLE_USER(20), ROLE_ADMIN(30);
 
 	/**
 	 * Rights level of the role. A role with a superior rights level has rights
@@ -19,8 +16,7 @@ public enum Role {
 	 */
 	private Integer rightsLevel;
 
-	private Role(String role_label, Integer rightsLevel) {
-		this.label = role_label;
+	private Role(Integer rightsLevel) {
 		this.rightsLevel = rightsLevel;
 	}
 
@@ -50,12 +46,5 @@ public enum Role {
 		return Stream.of(this.getClass().getEnumConstants())
 				.filter(r -> this.isSufficient(r))
 				.collect(Collectors.toSet());
-	}
-	
-	/**
-	 * Serialize the role as its role label.
-	 */
-	public String toString() {
-		return this.label;
 	}
 }

@@ -1,7 +1,0 @@
-recipe_tid;product_tid;quantity
-1;1;2|NO_UNIT
-1;2;0.5|LITER
-1;3;200|GRAM
-1;4;50|GRAM
-1;5;1|KILOGRAM
-2;6;1|NO_UNIT
