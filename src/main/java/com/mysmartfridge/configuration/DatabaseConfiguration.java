@@ -1,5 +1,8 @@
 package com.mysmartfridge.configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mongeez.Mongeez;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,13 +12,16 @@ import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mapping.model.CamelCaseSplittingFieldNamingStrategy;
 import org.springframework.data.mapping.model.FieldNamingStrategy;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
+import com.mysmartfridge.infrastructure.persistence.UuidToStringConverter;
 
 @Configuration
 @Import(value = MongoAutoConfiguration.class)
@@ -30,6 +36,9 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
     @Autowired
     private MongoProperties mongoProperties;
     
+    @Autowired
+    private UuidToStringConverter uuidToStringConverter;
+    
     @Override
     protected FieldNamingStrategy fieldNamingStrategy() {
     	return new CamelCaseSplittingFieldNamingStrategy("_");
@@ -43,6 +52,14 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
 	@Override
 	public Mongo mongo() throws Exception {
 		return mongo;
+	}
+	
+	@Override
+	@Bean
+	public CustomConversions customConversions() {
+		List<Converter<?, ?>> converters = new ArrayList<>();
+		converters.add(uuidToStringConverter);
+		return new CustomConversions(converters);
 	}
 
     @Bean

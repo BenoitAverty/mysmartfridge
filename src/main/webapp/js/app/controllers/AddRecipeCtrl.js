@@ -7,7 +7,14 @@ module.exports = function(RecipeService) {
     nbPeople: 4,
     prepTime: 20,
     cookTime: 15,
-    ingredients: ['500g de sucre', '1kg de farine'],
+    ingredients: [
+      {
+        quantity: 500, unit: "GRAM", product: "sucre"
+      },
+      {
+        quantity: 1, unit: "KILOGRAM", product: "farine"
+      }
+    ],
     steps: ['Étape 1', 'Étape 2']
   }
 
@@ -22,7 +29,7 @@ module.exports = function(RecipeService) {
 
   // Implementations
   function addIngredient() {
-    vm.recipe.ingredients.push('');
+    vm.recipe.ingredients.push({quantity: "", unit: "", product: ""});
   }
 
   function removeIngredient(index) {

@@ -36,7 +36,12 @@
 								<h2 class="intro-text text-center">Ingredients</h2>
 								<hr>
                 <ul>
-									<li ng-repeat="i in addRecipeCtrl.recipe.ingredients track by $index"><input type="text" ng-model="addRecipeCtrl.recipe.ingredients[$index]" /> <a href="" data-ng-click="addRecipeCtrl.removeIngredient($index)">X</a></li>
+									<li ng-repeat="i in addRecipeCtrl.recipe.ingredients track by $index">
+										<input type="text" ng-model="addRecipeCtrl.recipe.ingredients[$index].product" /> :
+										<input type="text" ng-model="addRecipeCtrl.recipe.ingredients[$index].quantity" />
+										<input type="text" ng-model="addRecipeCtrl.recipe.ingredients[$index].unit" />
+										<a href="" data-ng-click="addRecipeCtrl.removeIngredient($index)">X</a>
+									</li>
 									<li><a href="" data-ng-click="addRecipeCtrl.addIngredient()">Add an ingredient</a></li>
 								</ul>
 						</div>

@@ -53,7 +53,8 @@ public class RecipeDto {
 	/**
 	 * Dto for the ingredients of the recipe.
 	 */
-	public class IngredientDto {
+	@NoArgsConstructor
+	public static class IngredientDto {
 		
 		public IngredientDto(Ingredient i) {
 			this.quantity = i.getQuantity().getValue();

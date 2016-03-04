@@ -21,7 +21,7 @@ public class User implements Serializable {
 	 */
 	@Getter
 	@Id
-	private UUID uuid;
+	private UUID uuid = UUID.randomUUID();
 
 	/**
 	 * Email address of the user.

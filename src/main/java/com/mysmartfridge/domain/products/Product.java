@@ -23,7 +23,7 @@ public class Product {
 	 */
 	@Id
 	@Getter
-	private UUID uuid;
+	private UUID uuid = UUID.randomUUID();
 	
 	/**
 	 * Name of the product/

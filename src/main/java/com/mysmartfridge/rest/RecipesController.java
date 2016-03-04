@@ -34,7 +34,7 @@ public class RecipesController {
 	 * Get a particular recipe from its uuid.
 	 */
 	@RequestMapping(value="/{uuid}", method=RequestMethod.GET)
-	public ResponseEntity<RecipeDto> getRecipesTid(@PathVariable("uuid") UUID uuid) {
+	public ResponseEntity<RecipeDto> getRecipesUuid(@PathVariable("uuid") UUID uuid) {
 		return new ResponseEntity<RecipeDto>(recipeApp.findARecipe(uuid), HttpStatus.OK);
 	}
 	

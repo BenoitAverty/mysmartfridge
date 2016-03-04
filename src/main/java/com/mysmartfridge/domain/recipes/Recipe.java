@@ -30,7 +30,7 @@ public class Recipe implements Serializable {
 
 	@Id
 	@Getter
-	private UUID uuid;
+	private UUID uuid = UUID.randomUUID();
 
 	@Getter
 	private String title;
