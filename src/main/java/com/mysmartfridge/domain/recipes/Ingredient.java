@@ -2,6 +2,8 @@ package com.mysmartfridge.domain.recipes;
 
 import java.io.Serializable;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import com.mysmartfridge.domain.products.Product;
 
 import lombok.AccessLevel;
@@ -34,6 +36,7 @@ public class Ingredient implements Serializable {
 	 * The product present in the recipe.
 	 */
 	@Getter
+	@DBRef
 	private Product product;
 	
 	/**
