@@ -1,14 +1,16 @@
 package com.mysmartfridge.domain.recipes;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mysmartfridge.domain.Entity;
+import com.mysmartfridge.domain.products.Product;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -23,31 +25,9 @@ import lombok.NoArgsConstructor;
  * 
  */
 @Document(collection = "recipes")
-@NoArgsConstructor(access=AccessLevel.PRIVATE)
-public class Recipe implements Serializable {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class Recipe extends Entity {
 
-	private static final long serialVersionUID = -3895773238629033452L;
-
-	@Id
-	@Getter
-	private UUID uuid = UUID.randomUUID();
-
-	@Getter
-	private String title;
-
-	@Getter
-	private int nbPeople;
-
-	@Getter
-	private int prepTime;
-
-	@Getter
-	private int cookTime;
-
-	@Getter
-	private List<Ingredient> ingredients;
-
-	private List<Step> steps;
 
 	/**
 	 * Create a recipe with specified parameters and no ingredients nor steps.
@@ -79,19 +59,20 @@ public class Recipe implements Serializable {
 	 *            the ingredient to add
 	 */
 	public void addIngredient(Ingredient ingredient) {
+		
+		for(Ingredient i : this.ingredients) {
+			if(i.getProduct().isSame(ingredient.getProduct())) {
+				throw new DuplicateIngredientException();
+			}
+		}
+		
 		this.ingredients.add(ingredient);
 	}
-
+	
 	/**
-	 * Add several {@link Ingredient}s to this recipe.
-	 * 
-	 * @param ingredients
-	 *            the ingredients to add
+	 * Add a step to this recipe.
 	 */
-	public void addIngredients(Collection<Ingredient> ingredients) {
-		for (Ingredient i : ingredients) {
-			this.addIngredient(i);
-		}
+	public void addStep(String stepText) {
 	}
 
 	/**
@@ -107,4 +88,36 @@ public class Recipe implements Serializable {
 				.collect(Collectors.toList());
 
 	}
+
+	/**
+	 * Return the list of ingredients of the recipe.
+	 * 
+	 * The list is returned as a defensive copy of the ingredients list, so the
+	 * ingredients cannot be modified through the returned reference of this
+	 * method. Instead, use the appropriate method (e.g. :
+	 * {@link #addIngredient(Ingredient) or #addIngredients(Collection)}.
+	 */
+	public List<Ingredient> getIngredients() {
+		return new ArrayList<>(ingredients);
+	}
+	
+	// Private members.
+	
+	@Getter
+	private String title;
+
+	@Getter
+	private int nbPeople;
+
+	@Getter
+	private int prepTime;
+
+	@Getter
+	private int cookTime;
+	
+	private List<Ingredient> ingredients;
+
+	private List<Step> steps;
+
+
 }

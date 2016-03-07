@@ -28,11 +28,8 @@ public class RecipesApplication {
 	@Autowired
 	private RecipesRepository recipeRepo;
 	
-	/**
-	 * Domain service used to parse Ingredients from string inputs into domain objects.
-	 */
 	@Autowired
-	private IngredientFactory ingredientParser;
+	private IngredientFactory ingredientFactory;
 
 	/**
 	 * Find a recipe based on its tid
@@ -57,8 +54,11 @@ public class RecipesApplication {
 		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.nbPeople, recipeDto.prepTime, recipeDto.cookTime);
 
 		recipeDto.ingredients.stream()
-			.map(dto -> ingredientParser.build(dto.quantity, dto.unit, dto.product))
+			.map(dto -> ingredientFactory.build(dto.quantity, dto.unit, dto.product))
 			.forEach(newRecipe::addIngredient);
+		
+		recipeDto.steps.stream()
+			.forEach(newRecipe::addStep);
 
 		recipeRepo.save(newRecipe);
 

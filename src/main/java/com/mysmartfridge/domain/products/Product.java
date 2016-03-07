@@ -1,9 +1,8 @@
 package com.mysmartfridge.domain.products;
 
-import java.util.UUID;
-
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mysmartfridge.domain.Entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,14 +15,7 @@ import lombok.NoArgsConstructor;
  */
 @Document(collection="products")
 @NoArgsConstructor(access=AccessLevel.PRIVATE)
-public class Product {
-
-	/**
-	 * tid of the product.
-	 */
-	@Id
-	@Getter
-	private UUID uuid = UUID.randomUUID();
+public class Product extends Entity {
 	
 	/**
 	 * Name of the product/

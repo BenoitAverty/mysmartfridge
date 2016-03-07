@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import com.mysmartfridge.domain.products.Product;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
  * </ul>
  */
 @NoArgsConstructor(access=AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class Ingredient implements Serializable {
 	
 	private static final long serialVersionUID = -1040899094370022361L;
@@ -38,14 +40,6 @@ public class Ingredient implements Serializable {
 	@Getter
 	@DBRef
 	private Product product;
-	
-	/**
-	 * Constructs an Ingredient from a Quantity and a product.
-	 */
-	public Ingredient(Quantity q, Product p) {
-		quantity = q;
-		product = p;
-	}
 	
 	/**
 	 * {@inheritDoc}
