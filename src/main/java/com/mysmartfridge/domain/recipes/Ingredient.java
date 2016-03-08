@@ -6,10 +6,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import com.mysmartfridge.domain.products.Product;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * This represents an ingredient that can be used in a recipe.
@@ -22,24 +20,21 @@ import lombok.NoArgsConstructor;
  * 	<li>No identity (No need to find an ingredient by itself, always through recipe)</li>
  * </ul>
  */
-@NoArgsConstructor(access=AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class Ingredient implements Serializable {
-	
-	private static final long serialVersionUID = -1040899094370022361L;
+public class Ingredient {
 	
 	/** 
 	 * Quantity of the product in the recipe.
 	 */
 	@Getter
-	private Quantity quantity;
+	private final Quantity quantity;
 	
 	/**
 	 * The product present in the recipe.
 	 */
 	@Getter
 	@DBRef
-	private Product product;
+	private final Product product;
 	
 	/**
 	 * {@inheritDoc}

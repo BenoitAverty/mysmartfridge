@@ -1,9 +1,8 @@
 package com.mysmartfridge.domain.recipes;
 
-import java.io.Serializable;
-
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -13,13 +12,12 @@ import lombok.Getter;
  *
  */
 @Document(collection="steps")
-public class Step implements Serializable {
-	
-	private static final long serialVersionUID = 7932211446922316915L;
-	
-	@Getter
-	private int index;
+@AllArgsConstructor
+public class Step {
 	
 	@Getter
-	private String text;
+	private final int index;
+	
+	@Getter
+	private final String text;
 }

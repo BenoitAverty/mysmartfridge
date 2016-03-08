@@ -2,19 +2,13 @@ package com.mysmartfridge.domain.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.NotImplementedException;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mysmartfridge.domain.Entity;
-import com.mysmartfridge.domain.products.Product;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * Entity representing a recipe managed by the system.
@@ -25,7 +19,6 @@ import lombok.NoArgsConstructor;
  * 
  */
 @Document(collection = "recipes")
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Recipe extends Entity {
 
 
@@ -73,6 +66,7 @@ public class Recipe extends Entity {
 	 * Add a step to this recipe.
 	 */
 	public void addStep(String stepText) {
+		this.steps.add(new Step(this.steps.size(),stepText));
 	}
 
 	/**
