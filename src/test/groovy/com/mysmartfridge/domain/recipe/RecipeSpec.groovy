@@ -45,14 +45,17 @@ class RecipeSpec extends Specification {
 		given: 'Two steps'
 			String step1 = "Step1"
 			String step2 = "Step2"
+			String step3 = "Step3"
 		
 		when: 'Adding the steps to the recipe'
 			recipeUnderTest.addStep(step1)
 			recipeUnderTest.addStep(step2)
+			recipeUnderTest.addStep(step3)
 		then: 'getSteps() method returns the two steps in the right order'
 			recipeUnderTest.getSteps().size() == 2
 			recipeUnderTest.getSteps().get(0).equals(step1)
 			recipeUnderTest.getSteps().get(1).equals(step2)
+			recipeUnderTest.getSteps().get(0).equals(step3)
 		
 	}
 	
