@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 import com.mysmartfridge.domain.recipes.Ingredient;
 import com.mysmartfridge.domain.recipes.Recipe;
 
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
  * Represents a recipe as exposed by the application layer.
  */
 @NoArgsConstructor
+@EqualsAndHashCode
 public class RecipeDto {
 	
 	/**
@@ -54,6 +56,7 @@ public class RecipeDto {
 	 * Dto for the ingredients of the recipe.
 	 */
 	@NoArgsConstructor
+	@EqualsAndHashCode
 	public static class IngredientDto {
 		
 		public IngredientDto(Ingredient i) {
