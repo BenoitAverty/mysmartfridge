@@ -2,9 +2,6 @@ package com.mysmartfridge;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.time.Year;
 import java.util.Arrays;
 
 import org.slf4j.Logger;

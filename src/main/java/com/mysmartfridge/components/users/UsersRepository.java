@@ -1,4 +1,4 @@
-package com.mysmartfridge.domain.users;
+package com.mysmartfridge.components.users;
 
 import java.util.Optional;
 import java.util.UUID;

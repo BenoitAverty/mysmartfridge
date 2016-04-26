@@ -1,8 +1,9 @@
-package com.mysmartfridge.domain.users;
+package com.mysmartfridge.components.users;
 
+import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.mysmartfridge.domain.Entity;
 
 import lombok.Getter;
 
@@ -10,8 +11,11 @@ import lombok.Getter;
  * A user of the application.
  */
 @Document(collection="users")
-public class User extends Entity {
+class User {
 
+	@Id
+	private UUID id;
+	
 	/**
 	 * Email address of the user.
 	 */

@@ -25,7 +25,7 @@ import com.mysmartfridge.infrastructure.persistence.UuidToStringConverter;
 
 @Configuration
 @Import(value = MongoAutoConfiguration.class)
-@EnableMongoRepositories("com.mysmartfridge.domain")
+@EnableMongoRepositories("com.mysmartfridge.components")
 public class DatabaseConfiguration extends AbstractMongoConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);

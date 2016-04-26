@@ -5,8 +5,8 @@ import java.text.Normalizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysmartfridge.components.recipes.ProductsRepository;
 import com.mysmartfridge.domain.products.Product;
-import com.mysmartfridge.domain.products.ProductsRepository;
 import com.mysmartfridge.domain.recipes.Quantity.Unit;
 
 /**

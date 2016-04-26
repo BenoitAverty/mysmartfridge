@@ -13,18 +13,17 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 
-import com.mysmartfridge.application.dto.RecipeDto;
-import com.mysmartfridge.domain.products.ProductsRepository;
+import com.mysmartfridge.components.recipes.ProductsRepository;
+import com.mysmartfridge.components.recipes.RecipeDto;
+import com.mysmartfridge.components.recipes.RecipesApplication;
+import com.mysmartfridge.components.recipes.RecipesRepository;
 import com.mysmartfridge.domain.recipes.Recipe;
-import com.mysmartfridge.domain.recipes.RecipesRepository;
 
 @SpringApplicationConfiguration(classes = RecipesApplicationTest.class) // This test class will configure its own context
 @ComponentScan("com.mysmartfridge.domain.recipes") // Scan recipes domain package so that domain services are available

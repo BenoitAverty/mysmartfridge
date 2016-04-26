@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mysmartfridge.Utils;
-import com.mysmartfridge.application.RecipesApplication;
-import com.mysmartfridge.application.dto.RecipeDto;
+import com.mysmartfridge.components.recipes.RecipeDto;
+import com.mysmartfridge.components.recipes.RecipesApplication;
 
 /**
  * Endpoint for the Recipe resource.

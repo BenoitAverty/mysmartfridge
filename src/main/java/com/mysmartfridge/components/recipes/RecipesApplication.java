@@ -1,4 +1,4 @@
-package com.mysmartfridge.application;
+package com.mysmartfridge.components.recipes;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -7,10 +7,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysmartfridge.application.dto.RecipeDto;
 import com.mysmartfridge.domain.recipes.IngredientFactory;
 import com.mysmartfridge.domain.recipes.Recipe;
-import com.mysmartfridge.domain.recipes.RecipesRepository;
 
 /**
  * Application layer related to Recipes.

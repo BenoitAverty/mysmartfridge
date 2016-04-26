@@ -13,8 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.mysmartfridge.components.recipes.ProductsRepository;
 import com.mysmartfridge.domain.products.Product;
-import com.mysmartfridge.domain.products.ProductsRepository;
 import com.mysmartfridge.domain.recipes.Quantity.Unit;
 import com.nitorcreations.junit.runners.NestedRunner;
 

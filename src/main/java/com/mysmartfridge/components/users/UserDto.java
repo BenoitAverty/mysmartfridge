@@ -1,6 +1,4 @@
-package com.mysmartfridge.application.dto;
-
-import com.mysmartfridge.domain.users.User;
+package com.mysmartfridge.components.users;
 
 /**
  * A user as exposed by the application layer.

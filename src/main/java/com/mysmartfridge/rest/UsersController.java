@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysmartfridge.application.UsersApplication;
-import com.mysmartfridge.application.dto.UserDto;
+import com.mysmartfridge.components.users.UserDto;
+import com.mysmartfridge.components.users.UsersApplication;
 
 /**
  * REST controller of the Users resource.

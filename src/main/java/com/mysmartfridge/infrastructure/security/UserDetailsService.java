@@ -2,7 +2,6 @@ package com.mysmartfridge.infrastructure.security;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -14,8 +13,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.mysmartfridge.domain.users.User;
-import com.mysmartfridge.domain.users.UsersRepository;
+import com.mysmartfridge.components.users.SecurityInfoDto;
+import com.mysmartfridge.components.users.UsersApplication;
 
 /**
  * Service used by spring security to retrieve user details. This service is
@@ -28,7 +27,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 	private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
 
 	@Autowired
-	private UsersRepository userRepository;
+	private UsersApplication usersApplication;
 
 	/**
 	 * Finds a user by its username, and returns a spring security UserDetails
@@ -39,21 +38,18 @@ public class UserDetailsService implements org.springframework.security.core.use
 
 		log.debug("Authenticating {}", login);
 
-		String lowercaseLogin = login.toLowerCase();
-
-		Optional<User> userFromDatabase = userRepository.findByEmail(lowercaseLogin);
-
-		return userFromDatabase.map(user -> {
-			List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-			grantedAuthorities.addAll(
-					user.getRole().getWeakerRoles().stream()
-					.map(r -> new SimpleGrantedAuthority(r.toString()))
-					.collect(Collectors.toList())
-				);
-
-			return new org.springframework.security.core.userdetails.User(lowercaseLogin, user.getPassword(), grantedAuthorities);
-		})
-		.orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));
+		SecurityInfoDto userInfo = usersApplication.getSecurityInfoForUsername(login)
+				.orElseThrow(() -> new UsernameNotFoundException("The username " + login + " was not found in database."));
+		
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+		
+		grantedAuthorities.addAll(
+			userInfo.authorities.stream()
+				.map(r -> new SimpleGrantedAuthority(r))
+				.collect(Collectors.toList())
+		);
+		
+		return new org.springframework.security.core.userdetails.User(userInfo.login, userInfo.password, grantedAuthorities);
 	}
 
 }

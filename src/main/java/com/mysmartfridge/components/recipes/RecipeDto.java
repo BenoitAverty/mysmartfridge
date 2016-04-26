@@ -1,4 +1,4 @@
-package com.mysmartfridge.application.dto;
+package com.mysmartfridge.components.recipes;
 
 import java.util.List;
 import java.util.UUID;

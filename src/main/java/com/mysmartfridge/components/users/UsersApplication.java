@@ -1,12 +1,10 @@
-package com.mysmartfridge.application;
+package com.mysmartfridge.components.users;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysmartfridge.application.dto.UserDto;
-import com.mysmartfridge.domain.users.UsersRepository;
 import com.mysmartfridge.infrastructure.security.SecurityUtils;
 
 /**
@@ -35,5 +33,12 @@ public class UsersApplication {
 		String currentLogin = SecurityUtils.getCurrentUserLogin();
 
 		return usersRepository.findByEmail(currentLogin).map(u -> new UserDto(u));
+	}
+	
+	public Optional<SecurityInfoDto> getSecurityInfoForUsername(String login) {
+		
+		Optional<User> userFromDatabase = usersRepository.findByEmail(login.toLowerCase());
+		
+		return userFromDatabase.map(SecurityInfoDto::new);
 	}
 }
