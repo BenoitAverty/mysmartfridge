@@ -1,26 +1,14 @@
 package com.mysmartfridge.domain.recipes;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AccessLevel;
+import com.mysmartfridge.domain.Entity;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * Entity representing a recipe managed by the system.
@@ -30,42 +18,9 @@ import lombok.NoArgsConstructor;
  * the recipe.
  * 
  */
-@Entity
-@Table(name = "Recipes")
-@NoArgsConstructor(access=AccessLevel.PRIVATE)
-public class Recipe implements Serializable {
+@Document(collection = "recipes")
+public class Recipe extends Entity {
 
-	private static final long serialVersionUID = -3895773238629033452L;
-
-	@Id
-	@Getter
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long tid;
-
-	@Column
-	@Getter
-	private String title;
-
-	@Column
-	@Getter
-	private int nbPeople;
-
-	@Column
-	@Getter
-	private int prepTime;
-
-	@Column
-	@Getter
-	private int cookTime;
-
-	@ElementCollection(targetClass = Ingredient.class)
-	@JoinTable(name = "ingredients")
-	@JoinColumn(name = "recipe_tid", referencedColumnName = "tid")
-	@Getter
-	private Set<Ingredient> ingredients;
-
-	@OneToMany(mappedBy = "recipe")
-	private Set<Step> steps;
 
 	/**
 	 * Create a recipe with specified parameters and no ingredients nor steps.
@@ -86,8 +41,8 @@ public class Recipe implements Serializable {
 		this.prepTime = prepTime;
 		this.cookTime = cookTime;
 
-		this.ingredients = new HashSet<>();
-		this.steps = new HashSet<>();
+		this.ingredients = new ArrayList<>();
+		this.steps = new ArrayList<>();
 	}
 
 	/**
@@ -97,19 +52,21 @@ public class Recipe implements Serializable {
 	 *            the ingredient to add
 	 */
 	public void addIngredient(Ingredient ingredient) {
+		
+		for(Ingredient i : this.ingredients) {
+			if(i.getProduct().isSame(ingredient.getProduct())) {
+				throw new DuplicateIngredientException();
+			}
+		}
+		
 		this.ingredients.add(ingredient);
 	}
-
+	
 	/**
-	 * Add several {@link Ingredient}s to this recipe.
-	 * 
-	 * @param ingredients
-	 *            the ingredients to add
+	 * Add a step to this recipe.
 	 */
-	public void addIngredients(Collection<Ingredient> ingredients) {
-		for (Ingredient i : ingredients) {
-			this.addIngredient(i);
-		}
+	public void addStep(String stepText) {
+		this.steps.add(new Step(this.steps.size(),stepText));
 	}
 
 	/**
@@ -125,4 +82,36 @@ public class Recipe implements Serializable {
 				.collect(Collectors.toList());
 
 	}
+
+	/**
+	 * Return the list of ingredients of the recipe.
+	 * 
+	 * The list is returned as a defensive copy of the ingredients list, so the
+	 * ingredients cannot be modified through the returned reference of this
+	 * method. Instead, use the appropriate method (e.g. :
+	 * {@link #addIngredient(Ingredient) or #addIngredients(Collection)}.
+	 */
+	public List<Ingredient> getIngredients() {
+		return new ArrayList<>(ingredients);
+	}
+	
+	// Private members.
+	
+	@Getter
+	private String title;
+
+	@Getter
+	private int nbPeople;
+
+	@Getter
+	private int prepTime;
+
+	@Getter
+	private int cookTime;
+	
+	private List<Ingredient> ingredients;
+
+	private List<Step> steps;
+
+
 }

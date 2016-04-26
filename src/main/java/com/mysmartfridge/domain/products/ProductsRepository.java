@@ -1,10 +1,11 @@
 package com.mysmartfridge.domain.products;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ProductsRepository extends CrudRepository<Product, Long> {
+public interface ProductsRepository extends MongoRepository<Product, UUID> {
 	
-	public Collection<Product> findAll();
+	public List<Product> findAll();
 }

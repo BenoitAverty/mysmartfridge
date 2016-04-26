@@ -1,44 +1,76 @@
 package com.mysmartfridge.configuration;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.h2.tools.Server;
+import org.mongeez.Mongeez;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.context.annotation.Import;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.mapping.model.CamelCaseSplittingFieldNamingStrategy;
+import org.springframework.data.mapping.model.FieldNamingStrategy;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.core.convert.CustomConversions;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import com.mysmartfridge.MySmartFridge;
-
-import liquibase.integration.spring.SpringLiquibase;
+import com.mongodb.Mongo;
+import com.mysmartfridge.infrastructure.persistence.UuidToStringConverter;
 
 @Configuration
-@EnableJpaRepositories("com.mysmartfridge.domain")
-@EnableTransactionManagement
-public class DatabaseConfiguration {
+@Import(value = MongoAutoConfiguration.class)
+@EnableMongoRepositories("com.mysmartfridge.domain")
+public class DatabaseConfiguration extends AbstractMongoConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
+    
+    @Autowired
+    private Mongo mongo;
 
-    /**
-     * Open the TCP port for the H2 database, so it is available remotely.
-     */
-    @Bean(initMethod = "start", destroyMethod = "stop")
-    @Profile(MySmartFridge.PROFILE_DEV)
-    public Server h2TCPServer() throws SQLException {
-        return Server.createTcpServer("-tcp","-tcpAllowOthers");
+    @Autowired
+    private MongoProperties mongoProperties;
+    
+    @Autowired
+    private UuidToStringConverter uuidToStringConverter;
+    
+    @Override
+    protected FieldNamingStrategy fieldNamingStrategy() {
+    	return new CamelCaseSplittingFieldNamingStrategy("_");
     }
+    
+	@Override
+	protected String getDatabaseName() {
+		return mongoProperties.getDatabase();
+	}
+
+	@Override
+	public Mongo mongo() throws Exception {
+		return mongo;
+	}
+	
+	@Override
+	@Bean
+	public CustomConversions customConversions() {
+		List<Converter<?, ?>> converters = new ArrayList<>();
+		converters.add(uuidToStringConverter);
+		return new CustomConversions(converters);
+	}
 
     @Bean
-    public SpringLiquibase liquibase(DataSource dataSource) {
-        SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setDataSource(dataSource);
-        liquibase.setChangeLog("classpath:liquibase/master.xml");
-        log.debug("Configuring Liquibase");
-        return liquibase;
+    public Mongeez mongeez() {
+        log.debug("Configuring Mongeez");
+        Mongeez mongeez = new Mongeez();
+        mongeez.setFile(new ClassPathResource("/mongeez/master.xml"));
+        mongeez.setMongo(mongo);
+        mongeez.setDbName(mongoProperties.getDatabase());
+        mongeez.process();
+        return mongeez;
     }
+    
 }

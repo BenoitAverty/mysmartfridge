@@ -12,10 +12,10 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class Quantity {
 	/** How much there is */
-	private Double value;
+	private final Double value;
 	
 	/** The unit this quantity is in. */
-	private Unit unit;
+	private final Unit unit;
 	
 	/**
 	 * Represent the units handled by the application.

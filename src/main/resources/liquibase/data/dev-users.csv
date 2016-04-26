@@ -1,3 +1,0 @@
-tid;email;username;password;role
-1;user@mysmartfridge.com;user;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;ROLE_USER
-2;admin@mysmartfridge.com;admin;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;ROLE_ADMIN

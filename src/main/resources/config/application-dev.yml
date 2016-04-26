@@ -1,10 +1,10 @@
 spring:
   profiles:
     active: dev # Activate spring dev profile
-  h2:
-    console: 
-      enabled: true
-      path: /console/
+  data:
+    mongodb:
+      database: mysmartfridge
+      port: 0 # use a random free port for the embedded mongodb
 server: 
   port: 8080
 logging:

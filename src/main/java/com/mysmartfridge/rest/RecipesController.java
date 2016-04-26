@@ -1,5 +1,7 @@
 package com.mysmartfridge.rest;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +31,11 @@ public class RecipesController {
 	RecipesApplication recipeApp;
 	
 	/** 
-	 * Get a particular recipe from its tid.
+	 * Get a particular recipe from its uuid.
 	 */
-	@RequestMapping(value="/{tid}", method=RequestMethod.GET)
-	public ResponseEntity<RecipeDto> getRecipesTid(@PathVariable("tid") long tid) {
-		return new ResponseEntity<RecipeDto>(recipeApp.findARecipe(tid), HttpStatus.OK);
+	@RequestMapping(value="/{uuid}", method=RequestMethod.GET)
+	public ResponseEntity<RecipeDto> getRecipesUuid(@PathVariable("uuid") UUID uuid) {
+		return new ResponseEntity<RecipeDto>(recipeApp.findARecipe(uuid), HttpStatus.OK);
 	}
 	
 	/**
@@ -44,7 +46,7 @@ public class RecipesController {
 		
 		RecipeDto created = recipeApp.createRecipe(dto);
 		
-		return ResponseEntity.created(Utils.buildUriForTid(created.tid)).build();
+		return ResponseEntity.created(Utils.buildUriForUuid(created.uuid)).build();
 		
 	}
 	

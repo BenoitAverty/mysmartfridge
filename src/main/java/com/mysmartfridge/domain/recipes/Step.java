@@ -1,13 +1,8 @@
 package com.mysmartfridge.domain.recipes;
 
-import java.io.Serializable;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -16,22 +11,13 @@ import lombok.Getter;
  * As this is a value object, it is immutable and has no tid.
  *
  */
-@Entity
-@Table(name="steps")
-public class Step implements Serializable {
+@Document(collection="steps")
+@AllArgsConstructor
+public class Step {
 	
-	private static final long serialVersionUID = 7932211446922316915L;
-
-	@ManyToOne
-	@Id
-	private Recipe recipe;
-	
-	@Column
 	@Getter
-	@Id
-	private int index;
+	private final int index;
 	
-	@Column
 	@Getter
-	private String text;
+	private final String text;
 }

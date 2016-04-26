@@ -1,8 +1,8 @@
 package com.mysmartfridge.application;
 
 import java.security.SecureRandom;
-
-import javax.transaction.Transactional;
+import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,21 +28,18 @@ public class RecipesApplication {
 	@Autowired
 	private RecipesRepository recipeRepo;
 	
-	/**
-	 * Domain service used to parse Ingredients from string inputs into domain objects.
-	 */
 	@Autowired
-	private IngredientFactory ingredientParser;
+	private IngredientFactory ingredientFactory;
 
 	/**
 	 * Find a recipe based on its tid
 	 * 
-	 * @param tid
-	 *            the tid of the recipe to find
+	 * @param uuid
+	 *            the uuid of the recipe to find
 	 * @return a RecipeDto representing the found recipe
 	 */
-	public RecipeDto findARecipe(long tid) {
-		return new RecipeDto(recipeRepo.findOne(tid));
+	public RecipeDto findARecipe(UUID uuid) {
+		return new RecipeDto(recipeRepo.findOne(uuid));
 	}
 
 	/**
@@ -52,14 +49,16 @@ public class RecipesApplication {
 	 *            the recipe to create.
 	 * @return a RecipeDto representing the created recipe.
 	 */
-	@Transactional
 	public RecipeDto createRecipe(RecipeDto recipeDto) {
 
 		Recipe newRecipe = new Recipe(recipeDto.title, recipeDto.nbPeople, recipeDto.prepTime, recipeDto.cookTime);
 
 		recipeDto.ingredients.stream()
-			.map(dto -> ingredientParser.build(dto.quantity, dto.unit, dto.product))
+			.map(dto -> ingredientFactory.build(dto.quantity, dto.unit, dto.product))
 			.forEach(newRecipe::addIngredient);
+		
+		recipeDto.steps.stream()
+			.forEach(newRecipe::addStep);
 
 		recipeRepo.save(newRecipe);
 
@@ -71,20 +70,11 @@ public class RecipesApplication {
 	 */
 	public RecipeDto findRandomRecipe() {
 
-		Iterable<Recipe> allRecipes = recipeRepo.findAll();
+		List<Recipe> allRecipes = recipeRepo.findAll();
 
 		SecureRandom rand = new SecureRandom();
-		double min = 1.0;
-		Recipe chosenRecipe = null;
-		for (Recipe recipe : allRecipes) {
-			double cur = rand.nextDouble();
-			if (cur < min) {
-				min = cur;
-				chosenRecipe = recipe;
-			}
-		}
-
-		return new RecipeDto(chosenRecipe);
+		
+		return allRecipes.isEmpty() ? null : new RecipeDto(allRecipes.get(rand.nextInt(allRecipes.size())));
 	}
 
 }
