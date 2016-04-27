@@ -1,13 +1,11 @@
-package com.mysmartfridge.domain.recipes;
+package com.mysmartfridge.components.recipes.domain;
 
 import java.text.Normalizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysmartfridge.components.recipes.ProductsRepository;
-import com.mysmartfridge.domain.products.Product;
-import com.mysmartfridge.domain.recipes.Quantity.Unit;
+import com.mysmartfridge.components.recipes.domain.Quantity.Unit;
 
 /**
  * Factory used to transform raw information coming from the user into an

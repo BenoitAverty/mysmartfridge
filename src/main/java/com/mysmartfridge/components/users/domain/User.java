@@ -1,4 +1,4 @@
-package com.mysmartfridge.components.users;
+package com.mysmartfridge.components.users.domain;
 
 import java.util.UUID;
 
@@ -11,7 +11,7 @@ import lombok.Getter;
  * A user of the application.
  */
 @Document(collection="users")
-class User {
+public class User {
 
 	@Id
 	private UUID id;

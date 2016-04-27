@@ -7,8 +7,10 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysmartfridge.domain.recipes.IngredientFactory;
-import com.mysmartfridge.domain.recipes.Recipe;
+import com.mysmartfridge.components.recipes.domain.IngredientFactory;
+import com.mysmartfridge.components.recipes.domain.Recipe;
+import com.mysmartfridge.components.recipes.domain.RecipesRepository;
+import com.mysmartfridge.components.recipes.dto.RecipeDto;
 
 /**
  * Application layer related to Recipes.

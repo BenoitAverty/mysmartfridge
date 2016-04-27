@@ -1,4 +1,4 @@
-package com.mysmartfridge.domain.recipes;
+package com.mysmartfridge.components.recipes.domain;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Document(collection="steps")
 @AllArgsConstructor
-public class Step {
+class Step {
 	
 	@Getter
 	private final int index;

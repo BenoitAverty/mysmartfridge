@@ -1,8 +1,6 @@
-package com.mysmartfridge.domain.recipes;
+package com.mysmartfridge.components.recipes.domain;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
-
-import com.mysmartfridge.domain.products.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

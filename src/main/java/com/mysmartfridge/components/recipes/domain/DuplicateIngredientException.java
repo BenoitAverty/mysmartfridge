@@ -1,4 +1,4 @@
-package com.mysmartfridge.domain.recipes;
+package com.mysmartfridge.components.recipes.domain;
 
 public class DuplicateIngredientException extends RuntimeException {
 

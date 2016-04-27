@@ -1,12 +1,12 @@
-package com.mysmartfridge.domain.recipes;
+package com.mysmartfridge.components.recipes.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.mysmartfridge.domain.Entity;
 
 import lombok.Getter;
 
@@ -19,9 +19,13 @@ import lombok.Getter;
  * 
  */
 @Document(collection = "recipes")
-public class Recipe extends Entity {
+public
+class Recipe {
 
-
+	@Id
+	@Getter
+	private UUID id;
+	
 	/**
 	 * Create a recipe with specified parameters and no ingredients nor steps.
 	 * 
@@ -54,7 +58,7 @@ public class Recipe extends Entity {
 	public void addIngredient(Ingredient ingredient) {
 		
 		for(Ingredient i : this.ingredients) {
-			if(i.getProduct().isSame(ingredient.getProduct())) {
+			if(i.getProduct().equals(ingredient.getProduct())) {
 				throw new DuplicateIngredientException();
 			}
 		}

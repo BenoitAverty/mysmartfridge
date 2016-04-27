@@ -1,4 +1,4 @@
-package com.mysmartfridge.application;
+package com.mysmartfridge.components.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 
-import com.mysmartfridge.components.recipes.ProductsRepository;
-import com.mysmartfridge.components.recipes.RecipeDto;
-import com.mysmartfridge.components.recipes.RecipesApplication;
-import com.mysmartfridge.components.recipes.RecipesRepository;
-import com.mysmartfridge.domain.recipes.Recipe;
+import com.mysmartfridge.components.recipes.domain.ProductsRepository;
+import com.mysmartfridge.components.recipes.domain.Recipe;
+import com.mysmartfridge.components.recipes.domain.RecipesRepository;
+import com.mysmartfridge.components.recipes.dto.RecipeDto;
 
 @SpringApplicationConfiguration(classes = RecipesApplicationTest.class) // This test class will configure its own context
 @ComponentScan("com.mysmartfridge.domain.recipes") // Scan recipes domain package so that domain services are available

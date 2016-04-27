@@ -1,11 +1,11 @@
-package com.mysmartfridge.components.recipes;
+package com.mysmartfridge.components.recipes.dto;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.mysmartfridge.domain.recipes.Ingredient;
-import com.mysmartfridge.domain.recipes.Recipe;
+import com.mysmartfridge.components.recipes.domain.Ingredient;
+import com.mysmartfridge.components.recipes.domain.Recipe;
 
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class RecipeDto {
 	 * @param recipe the domain Recipe the dto will be based on.
 	 */
 	public RecipeDto(Recipe recipe) {
-		this.uuid = recipe.getUuid();
+		this.uuid = recipe.getId();
 		this.title = recipe.getTitle();
 		this.nbPeople = recipe.getNbPeople();
 		this.prepTime = recipe.getPrepTime();

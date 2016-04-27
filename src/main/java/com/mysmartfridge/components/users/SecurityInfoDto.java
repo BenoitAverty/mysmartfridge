@@ -3,6 +3,8 @@ package com.mysmartfridge.components.users;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.mysmartfridge.components.users.domain.User;
+
 public class SecurityInfoDto {
 	public List<String> authorities;
 	public String password;

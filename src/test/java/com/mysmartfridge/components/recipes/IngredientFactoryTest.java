@@ -1,4 +1,4 @@
-package com.mysmartfridge.domain.recipes;
+package com.mysmartfridge.components.recipes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -13,9 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.mysmartfridge.components.recipes.ProductsRepository;
-import com.mysmartfridge.domain.products.Product;
-import com.mysmartfridge.domain.recipes.Quantity.Unit;
+import com.mysmartfridge.components.recipes.domain.Ingredient;
+import com.mysmartfridge.components.recipes.domain.IngredientFactory;
+import com.mysmartfridge.components.recipes.domain.Product;
+import com.mysmartfridge.components.recipes.domain.ProductsRepository;
+import com.mysmartfridge.components.recipes.domain.Quantity.Unit;
 import com.nitorcreations.junit.runners.NestedRunner;
 
 /**

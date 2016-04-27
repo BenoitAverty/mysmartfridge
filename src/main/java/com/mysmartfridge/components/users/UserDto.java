@@ -1,5 +1,7 @@
 package com.mysmartfridge.components.users;
 
+import com.mysmartfridge.components.users.domain.User;
+
 /**
  * A user as exposed by the application layer.
  * 

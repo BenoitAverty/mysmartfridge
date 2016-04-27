@@ -1,4 +1,4 @@
-package com.mysmartfridge.components.users;
+package com.mysmartfridge.components.users.domain;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 /**
  * Represent a role that a user can have in the application.
  */
-enum Role {
+public enum Role {
 	ROLE_ANONYMOUS(10), ROLE_USER(20), ROLE_ADMIN(30);
 
 	/**
