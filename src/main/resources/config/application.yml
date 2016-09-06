@@ -1,8 +1,0 @@
-# Actuator configuration
-management:
-  context-path: /manage
-endpoints: 
-  shutdown:
-    enabled: true
-    sensitive: false
-  
