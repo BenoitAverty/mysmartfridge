@@ -1,14 +1,20 @@
-const common = {
-  greeting: "Hello, ",
-}
+const deepAssign = require('deep-assign');
+
+const defaultConf = {
+};
 
 const production = {
-  test: 'prod',
+  mongo: {
+    uri: process.env.MONGODB_URI,
+  },
 };
 
 const development = {
-  test: 'dev',
+  mongo: {
+    uri: 'mongodb://localhost/my-smart-fridge',
+  },
 };
 
 const activeConf = (process.env.NODE_ENV === 'production') ? production : development;
-module.exports = Object.assign({}, common, activeConf);
+
+module.exports = deepAssign(defaultConf, activeConf);
