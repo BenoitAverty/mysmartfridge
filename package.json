@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nf start -p 3000"
+    "postinstall": "npm-run-all install:* && npm run build",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "build": "npm-run-all build:*",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build",
+    "start": "node scripts/start.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/BenoitAverty/MySmartFridge/issues"
   },
-  "homepage": "https://github.com/BenoitAverty/MySmartFridge#readme"
+  "homepage": "https://github.com/BenoitAverty/MySmartFridge#readme",
+  "dependencies": {
+    "npm-run-all": "^3.1.0"
+  },
+  "engines": {
+    "node": "^6.5.0",
+    "npm": "^3.10.3"
+  }
 }

@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/hello')
+    fetch(`/hello`)
       .then(r => r.text())
       .then(data => this.setState({ greeting: data }));
   }
