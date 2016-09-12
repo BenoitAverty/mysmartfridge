@@ -11,7 +11,9 @@
   "author": "Benoit Averty",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mongodb": "^2.2.9",
+    "deep-assign": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
