@@ -1,0 +1,37 @@
+{
+  "name": "my-smart-fridge",
+  "version": "1.0.0",
+  "description": "Food App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm-run-all install:* && npm run build",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "build": "npm-run-all build:*",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build",
+    "start": "node scripts/start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenoitAverty/MySmartFridge.git"
+  },
+  "author": "Benoit Averty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BenoitAverty/MySmartFridge/issues"
+  },
+  "homepage": "https://github.com/BenoitAverty/MySmartFridge#readme",
+  "dependencies": {
+    "npm-run-all": "^3.1.0"
+  },
+  "devDependencies": {
+    "mkdirp": "^0.5.1",
+    "mongodb-prebuilt": "^5.0.6"
+  },
+  "engines": {
+    "node": "^6.5.0",
+    "npm": "^3.10.3"
+  }
+}
